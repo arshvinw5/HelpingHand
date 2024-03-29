@@ -25,11 +25,12 @@ const Header = () => {
 							/>
 						</Link>
 					</div>
-					<div className='flex p-4 m-1 items-center h-[22px] border-2 border-gray-500 rounded-md text-gray-950 bg-[#eef3f8]'>
+					<div className='flex p-4 m-1 items-center h-[22px] border-2 border-black rounded-md text-gray-950 bg-[#eef3f8] '>
 						{/* Search Icon */}
 						<input
-							className='bg-none border-none outline-none bg-transparent'
+							className='bg-none border-none outline-none bg-transparent placeholder:text-sm'
 							type='text'
+							placeholder='Search'
 						/>
 						<SearchIcon className='cursor-pointer' />
 					</div>
@@ -41,7 +42,7 @@ const Header = () => {
 					<HeaderOption Icon={BusinessCenterIcon} title='Communities' />
 					<HeaderOption Icon={ChatIcon} title='Chat' />
 					<HeaderOption Icon={NotificationsIcon} title='Notifications' />
-					<HeaderOption avatar='/img/profile/profile.jpg' title='me' />
+					<HeaderOption avatar='/img/profile/profile.jpg' title='arshvinw5' />
 				</div>
 			</div>
 		</div>

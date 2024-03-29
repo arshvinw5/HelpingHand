@@ -28,10 +28,10 @@ const Post = ({ name, description, message, photoUrl }) => {
 			</div>
 			{/* Post button */}
 			<div className='flex'>
-				<InputOptions Icon={ThumbUpIcon} title='Like' color='gray' />
-				<InputOptions Icon={CommentIcon} title='Comment' color='gray' />
-				<InputOptions Icon={IosShareIcon} title='Share' color='gray' />
-				<InputOptions Icon={SendOutlinedIcon} title='Send' color='gray' />
+				<InputOptions Icon={ThumbUpIcon} title='Like' />
+				<InputOptions Icon={CommentIcon} title='Comment' />
+				<InputOptions Icon={IosShareIcon} title='Share' />
+				<InputOptions Icon={SendOutlinedIcon} title='Send' />
 			</div>
 		</div>
 	);

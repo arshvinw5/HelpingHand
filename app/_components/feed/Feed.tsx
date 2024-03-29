@@ -12,18 +12,23 @@ import { db } from '../firebase';
 import firebase from 'firebase/compat/app';
 
 const Feed = () => {
+	//to fetch the date from 'firebase'then store
 	const [posts, setPosts] = useState([]);
+	//to get the update value of input felid
 	const [input, setInput] = useState('');
 
 	useEffect(() => {
-		db.collection('posts').onSnapshot((snapshot) => {
-			setPosts(
-				snapshot.docs.map((doc) => ({
-					id: doc.id,
-					data: doc.data(),
-				}))
-			);
-		});
+		db.collection('posts')
+			.orderBy('timestamp', 'desc')
+			.onSnapshot((snapshot) => {
+				//we have set up all the date to post variable.
+				setPosts(
+					snapshot.docs.map((doc) => ({
+						id: doc.id,
+						data: doc.data(),
+					}))
+				);
+			});
 	}, []);
 
 	// Add button to post
@@ -38,6 +43,8 @@ const Feed = () => {
 			// this is related to get the time you
 			timestamp: firebase.firestore.FieldValue.serverTimestamp(),
 		});
+
+		setInput('');
 	};
 
 	return (
@@ -53,6 +60,7 @@ const Feed = () => {
 							className='focus:outline-none ml-2.5 font-semibold text-black'
 							style={{ flex: 1 }}
 							value={input}
+							//need this to get values to input in state
 							onChange={(e) => setInput(e.target.value)}
 						/>
 						<button onClick={sendPost} className='hidden' type='submit'>
