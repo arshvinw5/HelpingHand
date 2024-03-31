@@ -1,3 +1,4 @@
+'use client';
 import Image from 'next/image';
 import Link from 'next/link';
 // Icon Import
@@ -8,20 +9,31 @@ import HeaderOption from './HeaderOption';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import ChatIcon from '@mui/icons-material/Chat';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import { useDispatch } from 'react-redux';
+import { auth } from '../firebase';
+import { logout } from '@/app/_api/userSlice';
 
 const Header = () => {
+	const dispatch = useDispatch();
+
+	// to sigh out
+
+	const logoutApp = () => {
+		dispatch(logout());
+		auth.signOut;
+	};
 	return (
 		<div className='sticky'>
 			<div className='w-full bg-white top-0 flex justify-evenly border-b-2 border-gray-300 z-50 '>
 				{/* Header_left */}
 				<div className='flex m-2'>
-					<div className='object-contain mr-[10px]'>
+					<div className='object-contain mr-[10px] my-1'>
 						<Link href='/'>
 							<Image
 								src='/img/logo/Help.png'
 								alt='logo'
-								width={33}
-								height={33}
+								width={30}
+								height={30}
 							/>
 						</Link>
 					</div>
@@ -42,7 +54,11 @@ const Header = () => {
 					<HeaderOption Icon={BusinessCenterIcon} title='Communities' />
 					<HeaderOption Icon={ChatIcon} title='Chat' />
 					<HeaderOption Icon={NotificationsIcon} title='Notifications' />
-					<HeaderOption avatar='/img/profile/profile.jpg' title='arshvinw5' />
+					<HeaderOption
+						avatar='/img/profile/profile.jpg'
+						title='arshvinw5'
+						onClick={logoutApp}
+					/>
 				</div>
 			</div>
 		</div>

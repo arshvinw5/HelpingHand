@@ -1,7 +1,11 @@
 import Image from 'next/image';
 import { Avatar } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../_api/userSlice';
 
 const Sidebar = () => {
+	const user = useSelector(selectUser);
+
 	const recentItem = (topic: string) => {
 		return (
 			<div className='flex text-[13px] text-gray-500 font-bold cursor-pointer p-1 hover:bg-[#F5F5F5] hover:rounded-sm hover:cursor-pointer hover:text-black'>
@@ -25,10 +29,10 @@ const Sidebar = () => {
 					/>
 					<Avatar
 						className='mb-[10px] cursor-pointer object-contain '
-						src='/img/profile/profile.jpg'
-					/>
-					<h2 className='text-[18px]'>Arshvin Waduge</h2>
-					<h4 className='text-gray-600 text-[12px]'>tarshvin@gmail.com</h4>
+						src={user.photoUrl}
+					></Avatar>
+					<h2 className='text-[18px]'>{user.displayName}</h2>
+					<h4 className='text-gray-600 text-[12px]'>{user.email}</h4>
 				</div>
 				{/* Sidebar status */}
 				<div className='p-[20px] mb-[10px] rounded-bl-[10px] rounded-br-[10px]  border-gray-400 border-2 border-t-0 border-gray-40 bg-white'>

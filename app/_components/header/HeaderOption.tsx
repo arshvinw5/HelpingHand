@@ -1,9 +1,12 @@
 import { Avatar } from '@mui/material';
 import React from 'react';
 
-const HeaderOption = ({ avatar, Icon, title }) => {
+const HeaderOption = ({ avatar, Icon, title, onClick }) => {
 	return (
-		<div className='flex flex-col items-center mr-[20px] text-gray-600 cursor-pointer hover:text-black'>
+		<div
+			onClick={onClick}
+			className='flex flex-col items-center mr-[20px] text-gray-600 cursor-pointer hover:text-black'
+		>
 			{Icon && <Icon />}
 			{avatar && (
 				<Avatar className='object-contain h-[23px] w-[23px]' src={avatar} />
