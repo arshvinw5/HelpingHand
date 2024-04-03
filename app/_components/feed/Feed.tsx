@@ -8,10 +8,14 @@ import MusicVideoIcon from '@mui/icons-material/MusicVideo';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import CalendarViewDayIcon from '@mui/icons-material/CalendarViewDay';
 import Post from './Post';
-import { db } from '../firebase';
+import { db } from '../../_api/firebase';
 import firebase from 'firebase/compat/app';
+import { useSelector } from 'react-redux';
+import { selectUser } from '@/app/_api/userSlice';
+import FlipMove from 'react-flip-move';
 
 const Feed = () => {
+	const user = useSelector(selectUser);
 	//to fetch the date from 'firebase'then store
 	const [posts, setPosts] = useState([]);
 	//to get the update value of input felid
@@ -35,11 +39,11 @@ const Feed = () => {
 	const sendPost = (e) => {
 		e.preventDefault();
 		db.collection('posts').add({
-			name: 'Arshvin Waduge',
-			description: 'This is a test right now.',
+			name: user.displayName,
+			description: user.email,
 			//this is getting the value from input felid then update the state of the input
 			message: input,
-			photoUrl: '',
+			photoUrl: user.photoUrl || user.email[0],
 			// this is related to get the time you
 			timestamp: firebase.firestore.FieldValue.serverTimestamp(),
 		});
@@ -82,17 +86,19 @@ const Feed = () => {
 			</div>
 
 			{/*Post TimeLine*/}
-			<div>
-				{posts.map(({ id, data: { name, description, message, photoUrl } }) => (
-					<Post
-						key={id}
-						name={name}
-						description={description}
-						message={message}
-						photoUrl={photoUrl}
-					/>
-				))}
-			</div>
+			<FlipMove>
+				{posts.map(
+					({ id, data: { name, description, message, photoUrl } }, index) => (
+						<Post
+							key={id}
+							name={name}
+							description={description}
+							message={message}
+							photoUrl={photoUrl}
+						/>
+					)
+				)}
+			</FlipMove>
 		</div>
 	);
 };

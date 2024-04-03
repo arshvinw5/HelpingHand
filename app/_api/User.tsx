@@ -1,13 +1,15 @@
 'use Client';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectUser } from './userSlice';
+import { selectUser, setLoading } from './userSlice';
 import { useEffect } from 'react';
-import { auth } from '../_components/firebase';
+import { auth } from './firebase';
 import { login, logout } from '@/app/_api/userSlice';
 
 const User = () => {
 	const user = useSelector(selectUser);
 	const dispatch = useDispatch();
+
+	console.log({ user });
 
 	useEffect(() => {
 		//this is listener for listen any authenticate state changes
@@ -22,6 +24,7 @@ const User = () => {
 						photoUrl: userAuth.photoURL,
 					})
 				);
+				dispatch(setLoading(false));
 			} else {
 				//user is logged out
 				dispatch(logout());

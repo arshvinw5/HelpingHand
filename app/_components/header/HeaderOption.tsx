@@ -1,7 +1,10 @@
+import { selectUser } from '@/app/_api/userSlice';
 import { Avatar } from '@mui/material';
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 const HeaderOption = ({ avatar, Icon, title, onClick }) => {
+	const user = useSelector(selectUser);
 	return (
 		<div
 			onClick={onClick}
@@ -9,7 +12,10 @@ const HeaderOption = ({ avatar, Icon, title, onClick }) => {
 		>
 			{Icon && <Icon />}
 			{avatar && (
-				<Avatar className='object-contain h-[23px] w-[23px]' src={avatar} />
+				<Avatar
+					className='object-contain h-[23px] w-[23px]'
+					src={avatar}
+				></Avatar>
 			)}
 			<h3 className='text-[12px] font-normal'>{title}</h3>
 		</div>
