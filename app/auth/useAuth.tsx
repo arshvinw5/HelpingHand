@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 
 import {
 	createUserWithEmailAndPassword,
+	sendEmailVerification,
 	signInWithEmailAndPassword,
 	updateProfile,
 } from 'firebase/auth';
@@ -18,58 +19,53 @@ const useAuth = () => {
 	const [password, setPassword] = useState('');
 	const [profilePic, setProfilePic] = useState('');
 
-	// we are sending data to redux by 'dispatch
+	// we are sending data to redux by 'dispatch to change the user's data
 	const dispatch = useDispatch();
 
-	// const [name, setName] = useState('');
+	const [name, setName] = useState('');
 
-	// useEffect(() => {
-	// 	const name = `${firstName} ${surname}`;
-	// 	setName(name);
-	// }, [firstName, surname]);
+	useEffect(() => {
+		const name = `${firstName} ${surname}`;
+		setName(name);
+	}, [firstName, surname]);
 
-	const loginToApp = (e) => {
+	const loginToApp = async (e) => {
 		e.preventDefault();
-		signInWithEmailAndPassword(auth, email, password);
+		await signInWithEmailAndPassword(auth, email, password);
 	};
 
-	const reg = () => {
+	const reg = async () => {
 		if (!firstName && !surname) {
 			return alert(`Please enter your first name and surname.`);
 		}
-		createUserWithEmailAndPassword(auth, email, password)
-			.then((authUser) => {
-				signInWithEmailAndPassword(auth, email, password).then(
-					updateProfile(auth.currentUser, {
-						displayName: `${firstName} ${surname}`,
-					})
-				);
-			})
-			.catch((err) => {
-				alert(err);
-			});
 
-		// auth
-		// 	.createUserWithEmailAndPassword(email, password)
-		// 	.then((userAuth) => {
-		// 		userAuth.user
-		// 			.updateProfile({
-		// 				displayName: name,
-		// 				photoURL: profilePic,
-		// 			})
-		// 			.then(() => {
-		// 				//dispatch to update redux state with user info
-		// 				dispatch(
-		// 					login({
-		// 						email: userAuth.user.email,
-		// 						uid: userAuth.user.uid,
-		// 						displayName: name,
-		// 						photoUrl: profilePic,
-		// 					})
-		// 				);
-		// 			});
-		// 	})
-		// 	.catch((error) => alert(error));
+		const userAuth = auth.createUserWithEmailAndPassword(email, password);
+		const user = (await userAuth).user;
+
+		console.log(user);
+
+		if (user) {
+			await user
+				.updateProfile({
+					displayName: name,
+					photoURL: profilePic,
+				})
+				.then(() => {
+					dispatch(
+						login({
+							email: user.email,
+							uid: user.uid,
+							displayName: name,
+							photoUrl: user.profilePic,
+						})
+					);
+				});
+		} else {
+			// Handle the case where user is null (e.g., if createUserWithEmailAndPassword fails)
+			console.error('User authentication failed');
+			// Optionally, you can display an error message to the user
+			alert('User authentication failed. Please try again.');
+		}
 	};
 
 	return {

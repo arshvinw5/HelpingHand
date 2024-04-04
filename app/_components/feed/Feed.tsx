@@ -13,6 +13,7 @@ import firebase from 'firebase/compat/app';
 import { useSelector } from 'react-redux';
 import { selectUser } from '@/app/_api/userSlice';
 import FlipMove from 'react-flip-move';
+import { collection, addDoc } from 'firebase/firestore';
 
 const Feed = () => {
 	const user = useSelector(selectUser);
@@ -21,6 +22,7 @@ const Feed = () => {
 	//to get the update value of input felid
 	const [input, setInput] = useState('');
 
+	//connecting db to system then it
 	useEffect(() => {
 		db.collection('posts')
 			.orderBy('timestamp', 'desc')
@@ -36,9 +38,9 @@ const Feed = () => {
 	}, []);
 
 	// Add button to post
-	const sendPost = (e) => {
+	const sendPost = async (e) => {
 		e.preventDefault();
-		db.collection('posts').add({
+		await db.collection('posts').add({
 			name: user.displayName,
 			description: user.email,
 			//this is getting the value from input felid then update the state of the input
@@ -47,7 +49,7 @@ const Feed = () => {
 			// this is related to get the time you
 			timestamp: firebase.firestore.FieldValue.serverTimestamp(),
 		});
-
+		//to clear the status in the feed
 		setInput('');
 	};
 
@@ -61,7 +63,7 @@ const Feed = () => {
 						<input
 							type='text'
 							placeholder=''
-							className='focus:outline-none ml-2.5 font-semibold text-black'
+							className='focus:outline-none ml-2.5 font-medium text-gray-900'
 							style={{ flex: 1 }}
 							value={input}
 							//need this to get values to input in state

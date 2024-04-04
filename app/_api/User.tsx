@@ -13,14 +13,14 @@ const User = () => {
 
 	useEffect(() => {
 		//this is listener for listen any authenticate state changes
-		auth.onAuthStateChanged((userAuth) => {
+		auth.onAuthStateChanged(async (userAuth) => {
 			if (userAuth) {
 				//user is logged in
 				dispatch(
 					login({
+						displayName: userAuth.displayName,
 						email: userAuth.email,
 						uid: userAuth.uid,
-						displayName: userAuth.displayName,
 						photoUrl: userAuth.photoURL,
 					})
 				);
