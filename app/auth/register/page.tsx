@@ -14,6 +14,7 @@ export default function RegistrationPage() {
 		password,
 		setPassword,
 		reg,
+		notify,
 	} = useAuth();
 
 	return (
@@ -93,10 +94,13 @@ export default function RegistrationPage() {
 						</p>
 						<button
 							onClick={reg}
+							type='submit'
 							className='w-full p-2 mt-2 border border-black hover:bg-black hover:text-white'
 						>
 							Sign Up
 						</button>
+						<p className='text-sm text-center'>{notify}</p>
+
 						<div className='flex justify-center items-center mt-5 text-center'>
 							<Link href='/'>
 								<p className='text-sm font-medium'>Already have an account ?</p>

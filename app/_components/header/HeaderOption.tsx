@@ -12,10 +12,9 @@ const HeaderOption = ({ avatar, Icon, title, onClick }) => {
 		>
 			{Icon && <Icon />}
 			{avatar && (
-				<Avatar
-					className='object-contain h-[23px] w-[23px]'
-					src={avatar}
-				></Avatar>
+				<Avatar className='absolute h-2	w-2 ' src={avatar}>
+					{user.displayName[0]}
+				</Avatar>
 			)}
 			<h3 className='text-[12px] font-normal'>{title}</h3>
 		</div>

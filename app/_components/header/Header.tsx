@@ -55,7 +55,7 @@ const Header = () => {
 					<HeaderOption Icon={BusinessCenterIcon} title='Communities' />
 					<HeaderOption Icon={ChatIcon} title='Chat' />
 					<HeaderOption Icon={NotificationsIcon} title='Notifications' />
-					<HeaderOption avatar={true} title='test' onClick={handelLogout} />
+					<HeaderOption avatar={true} title='Log Out' onClick={handelLogout} />
 				</div>
 			</div>
 		</div>

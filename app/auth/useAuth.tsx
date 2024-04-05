@@ -3,14 +3,12 @@ import { useEffect, useState } from 'react';
 import { auth } from '../_api/firebase';
 import { login } from '../_api/userSlice';
 import { useDispatch } from 'react-redux';
-
 import {
-	createUserWithEmailAndPassword,
 	sendEmailVerification,
 	signInWithEmailAndPassword,
-	updateProfile,
 } from 'firebase/auth';
-import { error } from 'console';
+import { useRouter } from 'next/navigation';
+import { routes } from '../lib/assets/route_links';
 
 const useAuth = () => {
 	const [email, setEmail] = useState('');
@@ -18,53 +16,80 @@ const useAuth = () => {
 	const [surname, setSurname] = useState('');
 	const [password, setPassword] = useState('');
 	const [profilePic, setProfilePic] = useState('');
+	const [notify, setNotify] = useState('');
+
+	//to route to page you want if push you can go back but replace you cannot route back page.
+	const navDirect = useRouter();
 
 	// we are sending data to redux by 'dispatch to change the user's data
 	const dispatch = useDispatch();
 
-	const [name, setName] = useState('');
+	const [displayName, setDisplayName] = useState('');
 
 	useEffect(() => {
-		const name = `${firstName} ${surname}`;
-		setName(name);
+		const fullName = `${firstName} ${surname}`;
+		setDisplayName(fullName);
 	}, [firstName, surname]);
 
-	const loginToApp = async (e) => {
+	const loginToApp = async (e: SubmitEvent) => {
 		e.preventDefault();
 		await signInWithEmailAndPassword(auth, email, password);
 	};
 
-	const reg = async () => {
+	const reg = async (e: SubmitEvent) => {
+		e.preventDefault();
+
 		if (!firstName && !surname) {
 			return alert(`Please enter your first name and surname.`);
 		}
 
-		const userAuth = auth.createUserWithEmailAndPassword(email, password);
-		const user = (await userAuth).user;
+		try {
+			const userCredential = await auth.createUserWithEmailAndPassword(
+				email,
+				password
+			);
 
-		console.log(user);
+			const user = userCredential.user;
 
-		if (user) {
-			await user
-				.updateProfile({
-					displayName: name,
+			if (user) {
+				// Update user profile
+				await user.updateProfile({
+					displayName: displayName,
 					photoURL: profilePic,
-				})
-				.then(() => {
+				});
+
+				// Send email verification
+				await sendEmailVerification(user);
+
+				// Wait for user to refresh their data
+				await user.reload();
+
+				// Check if email is verified
+				if (user.emailVerified) {
+					// Email is verified, login user and redirect to home
 					dispatch(
 						login({
 							email: user.email,
 							uid: user.uid,
-							displayName: name,
-							photoUrl: user.profilePic,
+							displayName: displayName,
+							photoUrl: profilePic,
 						})
 					);
-				});
-		} else {
-			// Handle the case where user is null (e.g., if createUserWithEmailAndPassword fails)
-			console.error('User authentication failed');
-			// Optionally, you can display an error message to the user
-			alert('User authentication failed. Please try again.');
+					navDirect.replace(routes.home);
+				} else {
+					// Email is not verified, inform user to verify email
+
+					setNotify(
+						'Please verify your email address. Check your inbox for the verification email.'
+					);
+				}
+			} else {
+				console.error('User authentication failed');
+				alert('User authentication failed. Please try again.');
+			}
+		} catch (error) {
+			console.error('Error creating user:', error.message);
+			alert(`Error creating user: ${error.message}`);
 		}
 	};
 
@@ -81,7 +106,68 @@ const useAuth = () => {
 		setProfilePic,
 		reg,
 		loginToApp,
+		notify,
 	};
 };
 
 export default useAuth;
+
+// if (user) {
+
+// 	await sendEmailVerification(user);
+// 	await user
+// 		.updateProfile({
+// 			displayName: displayName,
+// 			photoURL: profilePic,
+// 		})
+// 		.then(() => {
+// 			//this will store the data in redux slice
+// 			dispatch(
+// 				login({
+// 					email: user.email,
+// 					uid: user.uid,
+// 					displayName: displayName,
+// 					photoUrl: profilePic,
+// 				})
+// 			);
+// 		});
+
+// 	navDirect.replace(routes.home);
+// } else {
+// 	// Handle the case where user is null (e.g., if createUserWithEmailAndPassword fails)
+// 	console.error('User authentication failed');
+// 	// Optionally, you can display an error message to the user
+// 	alert('User authentication failed. Please try again.');
+
+// 				// Update user profile
+// 				await user.updateProfile({
+// 					displayName: displayName,
+// 					photoURL: profilePic,
+// 				});
+
+// 				// Send email verification
+// 				await sendEmailVerification(user);
+
+// 				// Wait for user to refresh their data
+// 				await user.reload();
+
+// 				// Check if email is verified
+// 				if (user.emailVerified) {
+// 					// Email is verified, login user and redirect to home
+// 					dispatch(
+// 						login({
+// 							email: user.email,
+// 							uid: user.uid,
+// 							displayName: displayName,
+// 							photoUrl: profilePic,
+// 						})
+// 					);
+// 					navDirect.replace(routes.home);
+// 				} else {
+// 					// Email is not verified, inform user to verify email
+
+// 					setNotify(
+// 						'Please verify your email address. Check your inbox for the verification email.'
+// 					);
+// 				}
+// //

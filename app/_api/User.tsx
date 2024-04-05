@@ -9,19 +9,18 @@ const User = () => {
 	const user = useSelector(selectUser);
 	const dispatch = useDispatch();
 
-	console.log({ user });
-
 	useEffect(() => {
 		//this is listener for listen any authenticate state changes
-		auth.onAuthStateChanged(async (userAuth) => {
-			if (userAuth) {
+		auth.onAuthStateChanged(async (userCredential) => {
+			console.log({ userCredential });
+			if (userCredential) {
 				//user is logged in
 				dispatch(
 					login({
-						displayName: userAuth.displayName,
-						email: userAuth.email,
-						uid: userAuth.uid,
-						photoUrl: userAuth.photoURL,
+						displayName: userCredential.displayName,
+						email: userCredential.email,
+						uid: userCredential.uid,
+						photoUrl: userCredential.photoURL,
 					})
 				);
 				dispatch(setLoading(false));

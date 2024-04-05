@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from './userSlice';
+//you can put any ame to fetch data from rudux
 
 export const store = configureStore({
 	reducer: { user: userReducer },
