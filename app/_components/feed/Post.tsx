@@ -15,7 +15,9 @@ const Post = forwardRef(({ name, description, message, photoUrl }, ref) => {
 				<Avatar
 					className='mb-[10px] cursor-pointer object-contain '
 					src={photoUrl}
-				></Avatar>
+				>
+					{name[0]}
+				</Avatar>
 				{/* Profile into */}
 				<div className='ml-2.5'>
 					<h2>{name}</h2>

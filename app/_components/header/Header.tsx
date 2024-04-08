@@ -13,19 +13,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import { auth } from '../../_api/firebase';
 import { logout, selectUser } from '@/app/_api/userSlice';
 import { signOut } from 'firebase/auth';
+import { useRouter } from 'next/navigation';
+import { routes } from '@/app/lib/assets/route_links';
 
 const Header = () => {
 	const dispatch = useDispatch();
 	const user = useSelector(selectUser);
+	const navDirect = useRouter();
 
 	// to sigh out
 	const handelLogout = async () => {
 		dispatch(logout());
 		signOut(auth);
+		//for security
+		navDirect.replace(routes.home);
 	};
 	return (
 		<div className='sticky'>
-			<div className=' w-full bg-white top-0 flex justify-evenly border-b-2 border-gray-300 z-50 '>
+			<div className='w-full bg-white top-0 flex justify-evenly border-b-2 border-gray-300 z-50 '>
 				{/* Header_left */}
 				<div className='flex m-2'>
 					<div className='object-contain mr-[10px] my-1'>
@@ -38,7 +43,7 @@ const Header = () => {
 							/>
 						</Link>
 					</div>
-					<div className='flex p-4 m-1 items-center h-[22px] border-2 border-black rounded-md text-gray-950 bg-[#eef3f8] '>
+					<div className='flex p-4 m-1 items-center h-[22px] border border-black rounded-md text-gray-950 bg-[#eef3f8] '>
 						{/* Search Icon */}
 						<input
 							className='bg-none border-none outline-none bg-transparent placeholder:text-sm'

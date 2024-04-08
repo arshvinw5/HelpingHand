@@ -11,8 +11,10 @@ const HeaderOption = ({ avatar, Icon, title, onClick }) => {
 			className='flex flex-col items-center mr-[20px] text-gray-600 cursor-pointer hover:text-black'
 		>
 			{Icon && <Icon />}
+			{/* if we have the avatar then only it must be visible  */}
 			{avatar && (
-				<Avatar className='absolute h-2	w-2 ' src={avatar}>
+				<Avatar className='absolute h-[0px]	w-[10px] ' src={avatar}>
+					{/* This might be undefine '?'  */}
 					{user.displayName[0]}
 				</Avatar>
 			)}
@@ -22,3 +24,7 @@ const HeaderOption = ({ avatar, Icon, title, onClick }) => {
 };
 
 export default HeaderOption;
+
+// // So, in {avatar && (...)}, if avatar is truthy, whatever is inside t
+// he parentheses (represented by ...) will be rendered/executed.
+// If avatar is falsy, nothing inside the parentheses will be rendered/executed.

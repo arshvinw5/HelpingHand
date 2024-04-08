@@ -26,4 +26,6 @@ export const { login, logout, setLoading } = userSlice.actions;
 export const selectUser = (state: any) => state.user.user;
 // state => user slice => user variable (null)
 
+export const selectLoading = (state: any) => state.user.isLoading;
+
 export default userSlice.reducer;

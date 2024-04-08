@@ -4,13 +4,13 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
 const firebaseConfig = {
-	apiKey: 'AIzaSyByNitotapRcmhcAoVSHEjWXYdbxS7fNMQ',
-	authDomain: 'halping-hands-95b2d.firebaseapp.com',
-	projectId: 'halping-hands-95b2d',
-	storageBucket: 'halping-hands-95b2d.appspot.com',
-	messagingSenderId: '481327556083',
-	appId: '1:481327556083:web:778a2c9f90c0fb9ae35e86',
-	measurementId: 'G-HFLYZ9DN5W',
+	apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+	authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+	projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+	storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+	messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+	appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+	measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
 const app = firebase.initializeApp(firebaseConfig);

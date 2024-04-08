@@ -30,7 +30,9 @@ const Sidebar = () => {
 					<Avatar
 						className='mb-[10px] cursor-pointer object-contain '
 						src={user.photoUrl}
-					></Avatar>
+					>
+						{user?.displayName[0]}
+					</Avatar>
 					<h2 className='text-[18px]'>{user.displayName}</h2>
 					<h4 className='text-gray-600 text-[12px]'>{user.email}</h4>
 				</div>

@@ -13,7 +13,6 @@ import firebase from 'firebase/compat/app';
 import { useSelector } from 'react-redux';
 import { selectUser } from '@/app/_api/userSlice';
 import FlipMove from 'react-flip-move';
-import { collection, addDoc } from 'firebase/firestore';
 
 const Feed = () => {
 	const user = useSelector(selectUser);
@@ -45,7 +44,7 @@ const Feed = () => {
 			description: user.email,
 			//this is getting the value from input felid then update the state of the input
 			message: input,
-			photoUrl: user.photoUrl || user.email[0],
+			photoUrl: user.photoUrl || user.displayName[0],
 			// this is related to get the time you
 			timestamp: firebase.firestore.FieldValue.serverTimestamp(),
 		});
@@ -69,7 +68,7 @@ const Feed = () => {
 							//need this to get values to input in state
 							onChange={(e) => setInput(e.target.value)}
 						/>
-						<button onClick={sendPost} className='hidden' type='submit'>
+						<button onClick={sendPost} className='' type='submit'>
 							Send
 						</button>
 					</form>

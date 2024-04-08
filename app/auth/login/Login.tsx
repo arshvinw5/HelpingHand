@@ -7,7 +7,8 @@ import Link from 'next/link';
 import useAuth from '../useAuth';
 
 const Login = () => {
-	const { email, password, setEmail, setPassword, loginToApp } = useAuth();
+	const { email, password, setEmail, setPassword, loginToApp, googleSignIn } =
+		useAuth();
 	return (
 		<div className='relative w-full h-screen bg-zinc-900/90'>
 			<Image
@@ -55,7 +56,10 @@ const Login = () => {
 						Sign In
 					</button>
 					<div className='flex justify-between py-8'>
-						<button className='relative  flex justify-center items-center gap-3 border shadow-lg hover:shadow-xl px-6 py-2'>
+						<button
+							onClick={googleSignIn}
+							className='relative  flex justify-center items-center gap-3 border shadow-lg hover:shadow-xl px-6 py-2'
+						>
 							<FaGoogle />
 							Google
 						</button>
