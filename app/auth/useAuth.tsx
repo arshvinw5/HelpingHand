@@ -13,7 +13,6 @@ import {
 } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import { routes } from '../lib/assets/route_links';
-import { Token } from '@mui/icons-material';
 
 const useAuth = () => {
 	const [email, setEmail] = useState<string>('');

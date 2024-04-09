@@ -55,7 +55,7 @@ const Feed = () => {
 	return (
 		<div className='mx-[20px]'>
 			{/*Top status bar*/}
-			<div className='bg-white p-10 rounded-md pb-2.5 mb-2.5'>
+			<div className='shadow-xl p-10 rounded-md pb-2.5 mb-2.5 bg-white'>
 				<div className='border-gray-200 border-2 rounded-md flex p-2.5 text-gray-950 pl-4 '>
 					<CreateIcon />
 					<form action='' className='flex w-full'>

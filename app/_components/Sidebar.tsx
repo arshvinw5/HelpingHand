@@ -16,10 +16,10 @@ const Sidebar = () => {
 	};
 
 	return (
-		<div className='sticky top-[80px] '>
+		<div className='sticky md:top-[80px] '>
 			<div className=' rounded-sm text-center'>
 				{/* Sidebar Top */}
-				<div className='flex flex-col items-center border-2 border-gray-400 border-b-0 rounded-tl-[10px] rounded-tr-[10px] bg-white pb-[10px] '>
+				<div className='flex flex-col items-center shadow-xl rounded-tl-[10px] rounded-tr-[10px] bg-white pb-[10px] '>
 					<Image
 						src='/img/bg/bg.jpg'
 						alt='bg'
@@ -28,7 +28,7 @@ const Sidebar = () => {
 						className='mb-[-20px] w-full h-[60px] rounded-tl-[10px] rounded-tr-[10px] object-cover'
 					/>
 					<Avatar
-						className='mb-[10px] cursor-pointer object-contain '
+						className='mb-[10px] cursor-pointer object-contain shadow-xl '
 						src={user.photoUrl}
 					>
 						{user?.displayName[0]}
@@ -37,7 +37,7 @@ const Sidebar = () => {
 					<h4 className='text-gray-600 text-[12px]'>{user.email}</h4>
 				</div>
 				{/* Sidebar status */}
-				<div className='p-[20px] mb-[10px] rounded-bl-[10px] rounded-br-[10px]  border-gray-400 border-2 border-t-0 border-gray-40 bg-white'>
+				<div className='p-[20px] mb-[10px] rounded-bl-[10px] rounded-br-[10px] shadow-xl bg-white'>
 					{/*Track of volunteer hours*/}
 					<div className='mt-[10px] flex justify-between gap-16'>
 						<p className='text-gray-500 text-[10px] font-semibold'>
@@ -51,7 +51,7 @@ const Sidebar = () => {
 					</div>
 				</div>
 				{/*Sidebar bottom*/}
-				<div className='text-left p-[10px] border-2 border-gray-400 bg-white rounded-[10px] mt-[10px] '>
+				<div className='text-left p-[10px] shadow-xl bg-white rounded-[10px] mt-[10px] '>
 					<p className='text-[13px ] pb-[10px]'>Recent</p>
 					{recentItem('Developer')}
 					{recentItem('Js')}

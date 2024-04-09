@@ -6,20 +6,20 @@ import Login from './auth/login/Login';
 import Header from './_components/header/Header';
 
 export default function Home() {
-	const { user, loading } = User();
+	const { user, fetchingData } = User();
 
 	return (
 		<>
-			{!loading ? (
+			{fetchingData ? null : (
 				<>
 					{!user ? (
 						<Login />
 					) : (
 						<main>
 							<Header />
-							<div className='flex justify-center bg-gray-100  w-full pl-2.5 pr-2.5'>
+							<div className='flex justify-center w-full px-2.5'>
 								{/* App Body */}
-								<div className='flex bg-gray-100 w-full pt-5 px-2  '>
+								<div className='flex w-full pt-5 px-2 bg-gray-50'>
 									{/* Using max-width for responsiveness */}
 									<div style={{ flex: 0.2 }}>
 										{/* Sidebar taking up 20% */}
@@ -38,7 +38,7 @@ export default function Home() {
 						</main>
 					)}
 				</>
-			) : null}
+			)}
 		</>
 	);
 }
