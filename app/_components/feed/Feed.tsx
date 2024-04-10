@@ -53,9 +53,9 @@ const Feed = () => {
 	};
 
 	return (
-		<div className='mx-[20px]'>
+		<div className='mx-[15px] md:mx-[10px]'>
 			{/*Top status bar*/}
-			<div className='shadow-xl p-10 rounded-md pb-2.5 mb-2.5 bg-white'>
+			<div className='shadow-xl p-10 md:mt-5 rounded-md pb-2.5 mb-2.5 bg-white'>
 				<div className='border-gray-200 border-2 rounded-md flex p-2.5 text-gray-950 pl-4 '>
 					<CreateIcon />
 					<form action='' className='flex w-full'>
@@ -68,7 +68,7 @@ const Feed = () => {
 							//need this to get values to input in state
 							onChange={(e) => setInput(e.target.value)}
 						/>
-						<button onClick={sendPost} className='' type='submit'>
+						<button onClick={sendPost} className='font-semibold' type='submit'>
 							Send
 						</button>
 					</form>

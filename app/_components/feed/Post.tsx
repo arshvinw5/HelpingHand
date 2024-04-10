@@ -9,7 +9,7 @@ import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
 // eslint-disable-next-line react/display-name
 const Post = forwardRef(({ name, description, message, photoUrl }, ref) => {
 	return (
-		<div ref={ref} className='bg-white p-4 mb-2.5 rounded-md'>
+		<div ref={ref} className='bg-white p-4 mb-2.5 rounded-md shadow-xl'>
 			{/*Post header*/}
 			<div className='flex mb-2.5'>
 				<Avatar

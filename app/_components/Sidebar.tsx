@@ -16,16 +16,16 @@ const Sidebar = () => {
 	};
 
 	return (
-		<div className='sticky md:top-[80px] '>
-			<div className=' rounded-sm text-center'>
+		<div className='md:sticky md:top-[80px] my-5 '>
+			<div className=' rounded-sm text-center px-3 h-fit mx-[10px] md:mx-0'>
 				{/* Sidebar Top */}
-				<div className='flex flex-col items-center shadow-xl rounded-tl-[10px] rounded-tr-[10px] bg-white pb-[10px] '>
+				<div className='flex flex-col items-center shadow-xl rounded-tl-[10px] rounded-tr-[10px] bg-[#fff] pb-[10px]  '>
 					<Image
 						src='/img/bg/bg.jpg'
 						alt='bg'
 						height={100}
 						width={100}
-						className='mb-[-20px] w-full h-[60px] rounded-tl-[10px] rounded-tr-[10px] object-cover'
+						className='mb-[-23px] w-full h-[70px] rounded-tl-[10px] rounded-tr-[10px] object-cover'
 					/>
 					<Avatar
 						className='mb-[10px] cursor-pointer object-contain shadow-xl '
@@ -33,13 +33,13 @@ const Sidebar = () => {
 					>
 						{user?.displayName[0]}
 					</Avatar>
-					<h2 className='text-[18px]'>{user.displayName}</h2>
+					<h2 className='text-[18px] font-semibold'>{user.displayName}</h2>
 					<h4 className='text-gray-600 text-[12px]'>{user.email}</h4>
 				</div>
 				{/* Sidebar status */}
-				<div className='p-[20px] mb-[10px] rounded-bl-[10px] rounded-br-[10px] shadow-xl bg-white'>
+				<div className='p-[20px] mb-[10px] rounded-bl-[10px] rounded-br-[10px] shadow-xl bg-[#fff]'>
 					{/*Track of volunteer hours*/}
-					<div className='mt-[10px] flex justify-between gap-16'>
+					<div className='flex justify-between gap-16'>
 						<p className='text-gray-500 text-[10px] font-semibold'>
 							Volunteer Hours
 						</p>

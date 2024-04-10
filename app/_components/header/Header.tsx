@@ -28,11 +28,19 @@ const Header = () => {
 		//for security
 		navDirect.replace(routes.home);
 	};
+
+	const routePages = () => {
+		navDirect.push(routes.home);
+	};
+	const routeOrg = () => {
+		navDirect.push(routes.organization);
+	};
+
 	return (
-		<div className='sticky top-0 left-0 z-50'>
+		<div className='sticky top-0 left-0 z-50 w-full'>
 			<div className='relative w-full shadow-md bg-white flex justify-evenly items-center'>
 				{/* Header_left */}
-				<div className='flex m-2'>
+				<div className='flex m-2 '>
 					<div className='object-contain mr-[10px] my-1'>
 						<Link href='/'>
 							<Image
@@ -55,8 +63,12 @@ const Header = () => {
 				</div>
 				{/* Header_right */}
 				<div className='fixed md:sticky bottom-0 left-0 flex justify-center md:max-w-[450px] w-full items-center mx-auto border-t-2 border-gray-200 md:border-t-0 py-5 md:py-1 md:m-2 bg-white'>
-					<HeaderOption Icon={HomeIcon} title='Home' />
-					<HeaderOption Icon={SupervisorAccountIcon} title='Organization' />
+					<HeaderOption Icon={HomeIcon} title='Home' onClick={routePages} />
+					<HeaderOption
+						Icon={SupervisorAccountIcon}
+						title='Organization'
+						onClick={routeOrg}
+					/>
 					<HeaderOption Icon={EditCalendarIcon} title='Events' />
 					<HeaderOption Icon={ChatIcon} title='Chat' />
 					<HeaderOption Icon={NotificationsIcon} title='Notifications' />

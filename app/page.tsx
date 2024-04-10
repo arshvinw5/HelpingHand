@@ -17,23 +17,14 @@ export default function Home() {
 					) : (
 						<main>
 							<Header />
-							<div className='flex justify-center w-full px-2.5'>
-								{/* App Body */}
-								<div className='flex w-full pt-5 px-2 bg-gray-50'>
-									{/* Using max-width for responsiveness */}
-									<div style={{ flex: 0.2 }}>
-										{/* Sidebar taking up 20% */}
-										<Sidebar />
-									</div>
-									<div style={{ flex: 0.6 }}>
-										{/* Feed taking up 60% */}
-										<Feed />
-									</div>
-									<div style={{ flex: 0.2 }}>
-										{/* Right taking up 20% */}
-										{/* <Right /> */}
-									</div>
+							<div className='grid grid-cols-1 md:grid-cols-10'>
+								<div className=' md:col-span-2'>
+									<Sidebar />
 								</div>
+								<div className=' md:col-span-6'>
+									<Feed />
+								</div>
+								<div className='md:col-span-2'>Right</div>
 							</div>
 						</main>
 					)}
@@ -44,3 +35,38 @@ export default function Home() {
 }
 
 // {loading? 'add the loading component':'then rest of the code with user'}
+
+{
+	/* <div className='flex justify-center w-full px-2.5'> */
+}
+{
+	/* App Body */
+}
+{
+	/* <div className='flex w-full pt-5 px-2 bg-gray-50'> */
+}
+{
+	/* Using max-width for responsiveness */
+}
+// <div style={{ flex: 0.2 }}>
+{
+	/* Sidebar taking up 20% */
+}
+// <Sidebar />
+// // </div>
+// <div style={{ flex: 0.6 }}>
+{
+	/* Feed taking up 60% */
+}
+// <Feed />
+// // </div>
+// <div style={{ flex: 0.2 }}>
+{
+	/* Right taking up 20% */
+}
+{
+	/* <Right /> */
+}
+// // 	// </div>
+// // </div>
+// </div>

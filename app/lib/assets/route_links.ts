@@ -1,3 +1,5 @@
+import Organization from '@/app/(open_routes)/organizations/page';
+
 export const routes = {
 	home: '/',
 	sitemap: '/sitemap.xml',
@@ -20,4 +22,5 @@ export const routes = {
 	user_ads_base: '/p/user/my-ads',
 	favourites: '/p/user/favourites',
 	request_vehicle: '/p/request-vehicle',
+	organization: '/organizations',
 };
