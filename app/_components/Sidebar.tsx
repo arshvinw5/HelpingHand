@@ -2,9 +2,14 @@ import Image from 'next/image';
 import { Avatar } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../_api/userSlice';
+import CreateIcon from '@mui/icons-material/Create';
+import { useRouter } from 'next/navigation';
+import { routes } from '../lib/assets/route_links';
+import EditNoteIcon from '@mui/icons-material/EditNote';
 
 const Sidebar = () => {
 	const user = useSelector(selectUser);
+	const path = useRouter();
 
 	const recentItem = (topic: string) => {
 		return (
@@ -13,6 +18,10 @@ const Sidebar = () => {
 				<p>{topic}</p>
 			</div>
 		);
+	};
+
+	const editProfile = () => {
+		path.push(routes.profiles);
 	};
 
 	return (
@@ -25,10 +34,16 @@ const Sidebar = () => {
 						alt='bg'
 						height={100}
 						width={100}
-						className='mb-[-23px] w-full h-[70px] rounded-tl-[10px] rounded-tr-[10px] object-cover'
+						className='mb-[-50px] w-full h-[80px] rounded-tl-[10px] rounded-tr-[10px] object-cover'
 					/>
 					<Avatar
-						className='mb-[10px] cursor-pointer object-contain shadow-xl '
+						className='mb-[10px] cursor-pointer object-contain shadow-xl'
+						sx={{
+							width: 70,
+							height: 70,
+							fontSize: 30,
+							fontWeight: 600,
+						}}
 						src={user.photoUrl}
 					>
 						{user?.displayName[0]}
@@ -46,8 +61,18 @@ const Sidebar = () => {
 						<p className='font-bold'>200h</p>
 					</div>
 					{/*Track of Availability */}
-					<div className='mt-[10px] flex justify-between'>
+					<div className='mt-[10px] flex justify-between items-center'>
 						<p className='text-center'>Available </p>
+						<button
+							onClick={editProfile}
+							className='flex  justify-center items-center gap-1 m-0 px-[px] hover:bg-black hover:text-[#fff] hover:rounded-sm'
+						>
+							<EditNoteIcon
+								className='cursor-pointer'
+								sx={{ width: 12, height: 12 }}
+							/>
+							<p className='text-[11px]'>Edit Profile</p>
+						</button>
 					</div>
 				</div>
 				{/*Sidebar bottom*/}

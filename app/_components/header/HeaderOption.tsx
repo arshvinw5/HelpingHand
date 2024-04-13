@@ -9,17 +9,17 @@ const HeaderOption = ({ avatar, Icon, title, onClick }) => {
 	return (
 		<div
 			onClick={onClick}
-			className='flex flex-col items-center mr-[20px] text-gray-600 cursor-pointer hover:text-black'
+			className='flex flex-col items-center mx-[8px] text-gray-600 cursor-pointer hover:text-black'
 		>
 			{Icon && <Icon sx={{ width: 28, height: 28 }} />}
 			{/* if we have the avatar then only it must be visible  */}
 			{avatar && (
 				<Avatar
 					sx={{ width: 28, height: 28, fontSize: 15, fontWeight: 600 }}
-					src={avatar}
+					src={user?.photoUrl}
 				>
 					{/* This might be undefine '?'  */}
-					{user.displayName[0]}
+					{user?.displayName[0]}
 				</Avatar>
 			)}
 			<h3 className='text-[12px] font-normal'>{title}</h3>
