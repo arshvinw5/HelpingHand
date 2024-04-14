@@ -1,13 +1,10 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { MouseEventHandler, useEffect, useState } from 'react';
 import { v4 } from 'uuid';
-import { auth, db, storage } from '../../_api/firebase';
+import { auth, storage } from '../../_api/firebase';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-import { addDoc, collection } from '@firebase/firestore';
 import { useDispatch } from 'react-redux';
 import { login } from '@/app/_api/userSlice';
-import { getDisplayName } from 'next/dist/shared/lib/utils';
-import { onAuthStateChanged, updateProfile } from 'firebase/auth';
 
 const useImg = () => {
 	const [image, setImage] = useState<string>('');

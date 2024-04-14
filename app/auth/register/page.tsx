@@ -17,6 +17,8 @@ export default function RegistrationPage() {
 		setPassword,
 		reg,
 		notify,
+		uploadDp,
+		profilePic,
 	} = useAuth();
 
 	return (
@@ -48,6 +50,7 @@ export default function RegistrationPage() {
 								<div className='p-1'>
 									<label htmlFor='dp'>
 										<Avatar
+											src={profilePic}
 											className='mb-[10px] cursor-pointer object-contain group-hover:bg-black group-hover:text-white'
 											sx={{
 												width: 120,
@@ -65,7 +68,12 @@ export default function RegistrationPage() {
 										}}
 									/>
 								</div>
-								<input type='file' id='dp' style={{ display: 'none' }} />
+								<input
+									onChange={(e) => uploadDp(e)}
+									type='file'
+									id='dp'
+									style={{ display: 'none' }}
+								/>
 							</div>
 							{/* input field */}
 							<div className='flex flex-col justify-between md:gap-1 w-full '>

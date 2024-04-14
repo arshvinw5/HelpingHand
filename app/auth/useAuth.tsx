@@ -1,18 +1,18 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { auth } from '../_api/firebase';
+import { auth, storage } from '../_api/firebase';
 import { login } from '../_api/userSlice';
 import { useDispatch } from 'react-redux';
 import {
 	GoogleAuthProvider,
-	onAuthStateChanged,
 	sendEmailVerification,
 	signInWithEmailAndPassword,
 	signInWithPopup,
-	signInWithRedirect,
 } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import { routes } from '../lib/assets/route_links';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { v4 } from 'uuid';
 
 const useAuth = () => {
 	const [email, setEmail] = useState<string>('');
@@ -42,6 +42,19 @@ const useAuth = () => {
 		//ser email and password back to empty
 		setEmail('');
 		setPassword('');
+	};
+
+	const uploadDp = async (e: any) => {
+		e.preventDefault();
+		const fileRef = ref(storage, `imgDp/${v4()}`);
+		//upload files to storage
+		await uploadBytes(fileRef, e.target.files[0]).then(async (data) => {
+			await getDownloadURL(data.ref).then((linkUrl) => {
+				setProfilePic(linkUrl);
+			});
+		});
+
+		alert(`Profile Image Uploaded`);
 	};
 
 	//Registration Page function
@@ -128,11 +141,11 @@ const useAuth = () => {
 		password,
 		setPassword,
 		profilePic,
-		setProfilePic,
 		reg,
 		loginToApp,
 		notify,
 		googleSignIn,
+		uploadDp,
 	};
 };
 
