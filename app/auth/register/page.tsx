@@ -2,6 +2,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import useAuth from '../useAuth';
+import { Avatar } from '@mui/material';
+import EditNoteIcon from '@mui/icons-material/EditNote';
 
 export default function RegistrationPage() {
 	const {
@@ -40,28 +42,55 @@ export default function RegistrationPage() {
 								className='m-5'
 							/>
 						</div>
-						<div className='flex flex-col md:flex-row justify-between mt-8 md:gap-1 '>
-							<div className='flex flex-col mb-4'>
-								<input
-									value={firstName}
-									onChange={(e) => {
-										setFirstName(e.target.value);
-									}}
-									type='text'
-									className='border relative bg-gray-100 p-2 focus:outline-none placeholder:text-gray-500'
-									placeholder='First name'
-								/>
+						<div className='flex flex-col md:flex-row justify-between gap-3 md:gap-5 items-center mt-5 mb-4 md:mb-0'>
+							{/* Avatar */}
+							<div className='relative flex justify-center items-center group'>
+								<div className='p-1'>
+									<label htmlFor='dp'>
+										<Avatar
+											className='mb-[10px] cursor-pointer object-contain group-hover:bg-black group-hover:text-white'
+											sx={{
+												width: 120,
+												height: 120,
+												fontSize: 50,
+												fontWeight: 600,
+											}}
+										/>
+									</label>
+									<EditNoteIcon
+										className='absolute bottom-3 right-0 text-gray-400  group-hover:text-black'
+										sx={{
+											width: 30,
+											height: 30,
+										}}
+									/>
+								</div>
+								<input type='file' id='dp' style={{ display: 'none' }} />
 							</div>
-							<div className='flex flex-col mb-4'>
-								<input
-									value={surname}
-									onChange={(e) => {
-										setSurname(e.target.value);
-									}}
-									type='text'
-									className='border relative bg-gray-100 p-2 focus:outline-none placeholder:text-gray-500'
-									placeholder='Surname'
-								/>
+							{/* input field */}
+							<div className='flex flex-col justify-between md:gap-1 w-full '>
+								<div className='flex flex-col mb-4'>
+									<input
+										value={firstName}
+										onChange={(e) => {
+											setFirstName(e.target.value);
+										}}
+										type='text'
+										className='border relative bg-gray-100 p-2 focus:outline-none placeholder:text-gray-500'
+										placeholder='First name'
+									/>
+								</div>
+								<div className='flex flex-col'>
+									<input
+										value={surname}
+										onChange={(e) => {
+											setSurname(e.target.value);
+										}}
+										type='text'
+										className='border relative bg-gray-100 p-2 focus:outline-none placeholder:text-gray-500'
+										placeholder='Surname'
+									/>
+								</div>
 							</div>
 						</div>
 						<div className='flex flex-col mb-4'>

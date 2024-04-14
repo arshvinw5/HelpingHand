@@ -34,6 +34,7 @@ const useImg = () => {
 
 	useEffect(() => {
 		auth.onAuthStateChanged(async (userCredential) => {
+			setLoading(true);
 			{
 				userCredential &&
 					userCredential
@@ -52,7 +53,7 @@ const useImg = () => {
 							);
 						});
 			}
-			console.log({ userCredential });
+			setLoading(false);
 		});
 	}, [image]);
 

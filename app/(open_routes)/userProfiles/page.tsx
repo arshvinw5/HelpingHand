@@ -5,6 +5,7 @@ import User from '@/app/_api/User';
 import useImg from './useImg';
 import Link from 'next/link';
 import { Avatar } from '@mui/material';
+import EditNoteIcon from '@mui/icons-material/EditNote';
 
 const Profiles = () => {
 	const { user } = User();
@@ -22,21 +23,30 @@ const Profiles = () => {
 								{/* top section */}
 								<div className='flex flex-col md:flex-row justify-between gap-10 items-center mb-3'>
 									{/* Avatar */}
-									<div className='flex justify-center items-center'>
-										<label htmlFor='dp'>
-											<Avatar
-												className='mb-[10px] cursor-pointer object-contain'
-												src={user.photoUrl}
+									<div className='relative group flex justify-center items-center'>
+										<div className='p-1'>
+											<label htmlFor='dp'>
+												<Avatar
+													src={user.photoUrl}
+													className='mb-[10px] cursor-pointer object-contain group-hover:bg-black group-hover:text-white'
+													sx={{
+														width: 120,
+														height: 120,
+														fontSize: 50,
+														fontWeight: 600,
+													}}
+												>
+													{user?.displayName[0]}
+												</Avatar>
+											</label>
+											<EditNoteIcon
+												className='absolute bottom-3 right-0 text-gray-400  group-hover:text-black'
 												sx={{
-													width: 120,
-													height: 120,
-													fontSize: 50,
-													fontWeight: 600,
+													width: 30,
+													height: 30,
 												}}
-											>
-												{user?.displayName[0]}
-											</Avatar>
-										</label>
+											/>
+										</div>
 										<input
 											type='file'
 											id='dp'
@@ -96,3 +106,20 @@ const Profiles = () => {
 };
 
 export default Profiles;
+
+{
+	/* <label htmlFor='dp'>
+<Avatar
+	className='mb-[10px] cursor-pointer object-contain'
+	src={user.photoUrl}
+	sx={{
+		width: 120,
+		height: 120,
+		fontSize: 50,
+		fontWeight: 600,
+	}}
+>
+	{user?.displayName[0]}
+</Avatar>
+</label> */
+}
