@@ -1,21 +1,41 @@
 'use client';
-import { MouseEventHandler, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { v4 } from 'uuid';
 import { auth, storage } from '../../_api/firebase';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { useDispatch } from 'react-redux';
 import { login } from '@/app/_api/userSlice';
+import { getAuth } from 'firebase/auth';
+import { count } from 'console';
+import { useRouter } from 'next/navigation';
+import { routes } from '@/app/lib/assets/route_links';
 
 const useImg = () => {
+	const dispatch = useDispatch();
+	const path = useRouter();
+
+	//To update the Profile picture
 	const [image, setImage] = useState<string>('');
 	const [loading, setLoading] = useState<boolean>(false);
 
-	console.log(image);
+	//user information
+	const [firstName, setFirstName] = useState<string>('');
+	const [surname, setSurname] = useState<string>('');
+	const [email, setEmail] = useState<string>('');
+	const [password, setPassword] = useState<string>('');
+	const [notify, setNotify] = useState<string>('');
 
-	const dispatch = useDispatch();
+	const [displayName, setDisplayName] = useState<string>('');
 
-	const uploadDp = async (e: any) => {
+	useEffect(() => {
+		const fullName = `${firstName} ${surname}`;
+		setDisplayName(fullName);
+	}, [firstName, surname]);
+
+	//Upload the dp
+	const updateProfile = async (e: any) => {
 		e.preventDefault();
+
 		const fileRef = ref(storage, `imgDp/${v4()}`);
 		//upload files to storage
 		await uploadBytes(fileRef, e.target.files[0]).then(async (data) => {
@@ -24,35 +44,47 @@ const useImg = () => {
 			});
 		});
 
-		alert(`Image Uploaded`);
+		setNotify(`Image Uploaded`);
 	};
 
-	//to update profile
+	//to upload and update the profile
 
-	useEffect(() => {
-		auth.onAuthStateChanged(async (userCredential) => {
-			setLoading(true);
-			{
-				userCredential &&
-					userCredential
-						?.updateProfile({
-							displayName: userCredential.displayName,
-							photoURL: image,
-						})
-						.then(() => {
-							dispatch(
-								login({
-									displayName: userCredential.displayName,
-									email: userCredential.email,
-									uid: userCredential.uid,
-									photoUrl: image,
-								})
-							);
-						});
-			}
-			setLoading(false);
-		});
-	}, [image]);
+	const UpdateProfileItems: React.MouseEventHandler<HTMLButtonElement> = async (
+		e
+	) => {
+		e.preventDefault();
+		if (!firstName && !surname) {
+			return setNotify(`Please enter your first name and surname.`);
+		}
+
+		try {
+			auth.onAuthStateChanged(async (currentUser) => {
+				setLoading(true);
+				{
+					currentUser &&
+						(await currentUser
+							?.updateProfile({
+								displayName: displayName,
+								photoURL: image,
+							})
+							.then(() => {
+								dispatch(
+									login({
+										displayName: displayName,
+										email: currentUser.email,
+										uid: currentUser.uid,
+										photoUrl: image,
+									})
+								);
+							}));
+					setLoading(false);
+					path.replace(routes.home);
+				}
+			});
+		} catch (error) {
+			alert(error);
+		}
+	};
 
 	//every time when we are fetching data from api we need to do it in useEffect
 
@@ -60,49 +92,44 @@ const useImg = () => {
 
 	// userCredential?.photoUrl -> userCredential=null && photoUrl=null otherwise this will state as 'undefined'
 
-	return { image, uploadDp, loading };
+	return {
+		image,
+		updateProfile,
+		loading,
+		firstName,
+		setFirstName,
+		surname,
+		setSurname,
+		UpdateProfileItems,
+		notify,
+	};
 };
 
 export default useImg;
 
-// const dispatch = useDispatch();
+// to update profile
 
-// useEffect(() => {S
+// useEffect(() => {
 // 	auth.onAuthStateChanged(async (userCredential) => {
-// 		await userCredential
-// 			?.updateProfile({
-// 				displayName: userCredential.displayName,
-// 				photoURL: image,
-// 			})
-// 			.then(() => {
-// 				dispatch(
-// 					login({
-// 						photoUrl: image,
+// 		setLoading(true);
+// 		{
+// 			userCredential &&
+// 				userCredential
+// 					?.updateProfile({
+// 						displayName: userCredential.displayName,
+// 						photoURL: image,
 // 					})
-// 				);
-// 			});
+// 					.then(() => {
+// 						dispatch(
+// 							login({
+// 								displayName: userCredential.displayName,
+// 								email: userCredential.email,
+// 								uid: userCredential.uid,
+// 								photoUrl: image,
+// 							})
+// 						);
+// 					});
+// 		}
+// 		setLoading(false);
 // 	});
-// }, []);
-
-// //function to add image url to firestore database
-// const storeImgUrl = async () => {
-// 	const dpUrlRef = collection(db, 'dpUrl');
-// 	await addDoc(dpUrlRef, {
-// 		dpUrl: image,
-// 	});
-// };
-
-// const handleUpload = async (e: any) => {
-// 	e.preventDefault();
-
-// 	//this is creating the path to fire store
-// 	const fileRef = ref(storage, `dpImg/${v4()}`);
-
-// 	//`dpImg/${userCredential.uid}.png`
-// 	// then upload the file
-// 	await uploadBytes(fileRef, e.target.files[0]).then(async (data) => {
-// 		await getDownloadURL(data.ref).then((urlLInk) => {
-// 			setImage(urlLInk);
-// 		});
-// 	});
-// };
+// }, [image]);

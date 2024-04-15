@@ -36,7 +36,7 @@ const useAuth = () => {
 	}, [firstName, surname]);
 
 	//Login page function
-	const loginToApp = async (e: SubmitEvent) => {
+	const loginToApp: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
 		e.preventDefault();
 		await signInWithEmailAndPassword(auth, email, password);
 		//ser email and password back to empty
@@ -58,7 +58,7 @@ const useAuth = () => {
 	};
 
 	//Registration Page function
-	const reg = async (e: SubmitEvent) => {
+	const reg: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
 		e.preventDefault();
 
 		if (!firstName && !surname) {

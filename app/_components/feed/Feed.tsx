@@ -19,7 +19,7 @@ const Feed = () => {
 	//to fetch the date from 'firebase'then store
 	const [posts, setPosts] = useState([]);
 	//to get the update value of input felid
-	const [input, setInput] = useState('');
+	const [input, setInput] = useState<string>('');
 
 	//connecting db to system then it
 	useEffect(() => {

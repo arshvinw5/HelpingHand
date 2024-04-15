@@ -5,10 +5,6 @@ export default function Layout({
 	children: React.ReactNode;
 	login: React.ReactNode;
 }) {
-	return (
-		<>
-			{children}
-			{login}
-		</>
-	);
+	const isLoading = false;
+	return isLoading ? <>{children}</> : login;
 }

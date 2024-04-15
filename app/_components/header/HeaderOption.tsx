@@ -4,7 +4,14 @@ import { useRouter } from 'next/navigation';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-const HeaderOption = ({ avatar, Icon, title, onClick }: {}) => {
+type headerOptionType = {
+	avatar?: React.ReactNode;
+	Icon?: React.ElementType;
+	title: string;
+	onClick?: () => {};
+};
+
+const HeaderOption = ({ avatar, Icon, title, onClick }: headerOptionType) => {
 	const user = useSelector(selectUser);
 	return (
 		<div

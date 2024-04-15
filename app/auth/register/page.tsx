@@ -136,7 +136,7 @@ export default function RegistrationPage() {
 						>
 							Sign Up
 						</button>
-						<p className='text-sm text-center'>{notify}</p>
+						<p className='text-sm text-center text-[#EF6262] my-3'>{notify}</p>
 
 						<div className='flex justify-center items-center mt-5 text-center'>
 							<Link href='/'>

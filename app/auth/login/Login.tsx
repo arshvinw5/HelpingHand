@@ -5,10 +5,13 @@ import { FaGoogle } from 'react-icons/fa';
 import { TfiMicrosoftAlt } from 'react-icons/tfi';
 import Link from 'next/link';
 import useAuth from '../useAuth';
+import { useRouter } from 'next/navigation';
 
 const Login = () => {
 	const { email, password, setEmail, setPassword, loginToApp, googleSignIn } =
 		useAuth();
+	const direction = useRouter();
+
 	return (
 		<div className='relative w-full h-screen bg-zinc-900/90'>
 			<Image
@@ -38,7 +41,7 @@ const Login = () => {
 							placeholder='Email address'
 						/>
 					</div>
-					<div className='flex flex-col mb-4'>
+					<div className='flex flex-col mb-1'>
 						<input
 							value={password}
 							onChange={(e) => {
@@ -48,6 +51,15 @@ const Login = () => {
 							className='border relative bg-gray-100 p-2 focus:outline-none placeholder:text-gray-500'
 							placeholder='Password'
 						/>
+					</div>
+					<div className='flex flex-col mb-2 items-end'>
+						<button
+							onClick={(e) => direction.push(routes.ResetPasswordLoginPage)}
+						>
+							<p className='text-[10px] text-[#1b75d0] p-1'>
+								Forgot Password ?
+							</p>
+						</button>
 					</div>
 					<button
 						onClick={loginToApp}

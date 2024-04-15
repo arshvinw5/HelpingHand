@@ -1,4 +1,4 @@
-'use Client';
+'use client';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectLoading, selectUser, setLoading } from './userSlice';
 import { useEffect, useState } from 'react';
