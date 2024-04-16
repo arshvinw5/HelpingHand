@@ -1,12 +1,11 @@
 import React from 'react';
-import useImg from './useImg';
 import Select from 'react-select';
-const DropDown = () => {
+
+const DropDown = ({ setSelectValue }: any) => {
 	const options = [
 		{ value: 'individual ', label: 'Individual' },
 		{ value: 'organization ', label: 'Organization ' },
 	];
-	const { selectValue, setSelectValue } = useImg();
 	return (
 		<div className='flex flex-col w-full border'>
 			<Select

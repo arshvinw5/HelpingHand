@@ -4,6 +4,7 @@ import Feed from './_components/feed/Feed';
 import User from './_api/User';
 import Login from './auth/login/Login';
 import Header from './_components/header/Header';
+import Widgets from './_components/widgets';
 
 export default function Home() {
 	const { user, fetchingData } = User();
@@ -18,13 +19,15 @@ export default function Home() {
 						<main>
 							<Header />
 							<div className='grid grid-cols-1 md:grid-cols-10'>
-								<div className=' md:col-span-2'>
+								<div className='md:col-span-2'>
 									<Sidebar />
 								</div>
 								<div className=' md:col-span-6'>
 									<Feed />
 								</div>
-								<div className='md:col-span-2'>Right</div>
+								<div className='md:col-span-2'>
+									<Widgets />
+								</div>
 							</div>
 						</main>
 					)}

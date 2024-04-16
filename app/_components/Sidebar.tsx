@@ -7,20 +7,12 @@ import { routes } from '../lib/assets/route_links';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import { useEffect, useState } from 'react';
 import { db } from '../_api/firebase';
-import {
-	QuerySnapshot,
-	collection,
-	getDocs,
-	onSnapshot,
-	query,
-} from '@firebase/firestore';
 
 const Sidebar = () => {
 	const user = useSelector(selectUser);
 	const path = useRouter();
 
 	const [userProfiles, setUserProfiles] = useState([]);
-	console.log({ userProfiles });
 
 	useEffect(() => {
 		db.collection('userProfiles').onSnapshot((snapshot) => {
@@ -51,7 +43,7 @@ const Sidebar = () => {
 		<div className='md:sticky md:top-[80px] my-5 '>
 			<div className=' rounded-sm text-center px-3 h-fit mx-[10px] md:mx-0'>
 				{/* Sidebar Top */}
-				<div className='flex flex-col items-center shadow-xl rounded-tl-[10px] rounded-tr-[10px] bg-[#fff] pb-[10px]  '>
+				<div className='flex flex-col items-center shadow-xl rounded-tl-[10px] rounded-tr-[10px] bg-[#fff] pb-1  '>
 					<Image
 						src='/img/bg/bg.jpg'
 						alt='bg'
@@ -73,6 +65,14 @@ const Sidebar = () => {
 					</Avatar>
 					<h2 className='text-[18px] font-semibold'>{user.displayName}</h2>
 					<h4 className='text-gray-600 text-[12px]'>{user.email}</h4>
+					{userProfiles.map(({ id, data }) => (
+						<h4
+							key={id}
+							className='font-semibold text-gray-500 text-[12px] text-center uppercase mt-1 '
+						>
+							{data.state}
+						</h4>
+					))}
 				</div>
 				{/* Sidebar status */}
 				<div className='p-[20px] mb-[10px] rounded-bl-[10px] rounded-br-[10px] shadow-xl bg-[#fff]'>
@@ -84,6 +84,12 @@ const Sidebar = () => {
 						<p className='font-bold'>200h</p>
 					</div>
 					{/*Track of Availability */}
+					<div className='mt-[10px] flex justify-between items-center'>
+						<p className='text-center'>Location </p>
+						{userProfiles.map(({ id, data: { location } }) => (
+							<p key={id}>{location}</p>
+						))}
+					</div>
 					<div className='mt-[10px] flex justify-between items-center'>
 						<p className='text-center'>Available </p>
 						<button
@@ -104,6 +110,16 @@ const Sidebar = () => {
 					{userProfiles.map(({ id, data: { bioData } }, index) =>
 						recentItem(bioData)
 					)}
+				</div>
+				<div className='text-left p-[10px] shadow-xl bg-white rounded-[10px] mt-[10px] '>
+					<h1 className='text-sm uppercase font-semibold text-gray-700 my-5'>
+						Volunteer Organizations
+					</h1>
+					{recentItem('United Nations Volunteers')}
+					{recentItem('International Volunteer HQ')}
+					{recentItem('Helping Hills Sri Lanka ')}
+					{recentItem(`Children's Hope`)}
+					{recentItem('Volunteer World')}
 				</div>
 			</div>
 		</div>

@@ -31,22 +31,6 @@ const useImg = () => {
 	const [location, setLocation] = useState<string>('');
 	const [birthday, setBirthday] = useState<string>('');
 
-	console.log(selectValue.value);
-
-	// To add values to user firestore
-	// useEffect(() => {
-	// 	auth.onAuthStateChanged(async (currentUser) => {
-	// 		{
-	// 			currentUser &&
-	// 				(await db.collection('user').doc(currentUser?.uid).set({
-	// 					state: selectValue.value,
-	// 				}));
-
-	// 			setbio(`Done`);
-	// 		}
-	// 	});
-	// }, [selectValue]);
-
 	useEffect(() => {
 		const fullName = `${firstName} ${surname}`;
 		setDisplayName(fullName);
@@ -94,7 +78,7 @@ const useImg = () => {
 											.collection('userProfiles')
 											.doc(currentUser?.uid)
 											.set({
-												state: selectValue,
+												state: selectValue.value,
 												bioData: bio,
 												location: location,
 											}));
@@ -173,3 +157,16 @@ export default useImg;
 // 		setLoading(false);
 // 	});
 // }, [image]);
+
+// To add values to user firestore
+// useEffect(() => {
+// 	auth.onAuthStateChanged(async (currentUser) => {
+// 		{
+// 			currentUser &&
+// 				(await db.collection('user').doc(currentUser?.uid).set({
+// 					state: selectValue.value,
+// 				}));
+
+// 		}
+// 	});
+// }, [selectValue]);

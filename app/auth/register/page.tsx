@@ -4,6 +4,7 @@ import Link from 'next/link';
 import useAuth from '../useAuth';
 import { Avatar } from '@mui/material';
 import EditNoteIcon from '@mui/icons-material/EditNote';
+import useImg from '@/app/(open_routes)/userProfiles/useImg';
 
 export default function RegistrationPage() {
 	const {

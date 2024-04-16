@@ -25,6 +25,7 @@ const Profiles = () => {
 		setBio,
 		location,
 		setLocation,
+		setSelectValue,
 	} = useImg();
 
 	return (
@@ -132,7 +133,7 @@ const Profiles = () => {
 									/>
 								</div>
 								<div className='flex flex-col mb-4'>
-									<DropDown />
+									<DropDown setSelectValue={setSelectValue} />
 								</div>
 								<div className='text-sm text-start border-b border-gray-400 font-semibold my-3'>
 									<p>Privacy ans safety</p>
