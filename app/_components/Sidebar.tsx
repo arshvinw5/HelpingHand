@@ -2,14 +2,37 @@ import Image from 'next/image';
 import { Avatar } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../_api/userSlice';
-import CreateIcon from '@mui/icons-material/Create';
 import { useRouter } from 'next/navigation';
 import { routes } from '../lib/assets/route_links';
 import EditNoteIcon from '@mui/icons-material/EditNote';
+import { useEffect, useState } from 'react';
+import { db } from '../_api/firebase';
+import {
+	QuerySnapshot,
+	collection,
+	getDocs,
+	onSnapshot,
+	query,
+} from '@firebase/firestore';
 
 const Sidebar = () => {
 	const user = useSelector(selectUser);
 	const path = useRouter();
+
+	const [userProfiles, setUserProfiles] = useState([]);
+	console.log({ userProfiles });
+
+	useEffect(() => {
+		db.collection('userProfiles').onSnapshot((snapshot) => {
+			//we have set up all the date to post variable.
+			setUserProfiles(
+				snapshot.docs.map((doc) => ({
+					id: doc.id,
+					data: doc.data(),
+				}))
+			);
+		});
+	}, []);
 
 	const recentItem = (topic: string) => {
 		return (
@@ -77,12 +100,10 @@ const Sidebar = () => {
 				</div>
 				{/*Sidebar bottom*/}
 				<div className='text-left p-[10px] shadow-xl bg-white rounded-[10px] mt-[10px] '>
-					<p className='text-[13px ] pb-[10px]'>Recent</p>
-					{recentItem('Developer')}
-					{recentItem('Js')}
-					{recentItem('Rotaract')}
-					{recentItem('LEO')}
-					{recentItem('Helping Hand')}
+					<p className='text-[13px ] pb-[10px]'>Bio</p>
+					{userProfiles.map(({ id, data: { bioData } }, index) =>
+						recentItem(bioData)
+					)}
 				</div>
 			</div>
 		</div>

@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { auth, storage } from '../_api/firebase';
+import { auth, db, storage } from '../_api/firebase';
 import { login } from '../_api/userSlice';
 import { useDispatch } from 'react-redux';
 import {
@@ -54,7 +54,7 @@ const useAuth = () => {
 			});
 		});
 
-		alert(`Profile Image Uploaded`);
+		setNotify(`Image Uploaded`);
 	};
 
 	//Registration Page function
@@ -72,6 +72,11 @@ const useAuth = () => {
 			);
 
 			const user = userCredential.user;
+
+			await db.collection('user').doc(user?.uid).set({
+				displayName: displayName,
+				email: email,
+			});
 
 			if (user) {
 				// Update user profile
@@ -110,7 +115,7 @@ const useAuth = () => {
 			}
 		} catch (error: any) {
 			console.error('Error creating user:', error.message);
-			alert(`Error creating user: ${error.message}`);
+			setNotify(`Error creating user: ${error.message}`);
 		}
 	};
 
@@ -127,7 +132,8 @@ const useAuth = () => {
 			});
 		} catch (error: any) {
 			console.error('Error creating user:', error.message);
-			alert(`Error creating user: ${error.message}`);
+			alert(`${error.message}`);
+			console.log({ error });
 		}
 	};
 

@@ -6,6 +6,7 @@ import { Avatar } from '@mui/material';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import { routes } from '@/app/lib/assets/route_links';
 import { useRouter } from 'next/navigation';
+import DropDown from './dropDown';
 
 const Profiles = () => {
 	const { user } = User();
@@ -20,6 +21,10 @@ const Profiles = () => {
 		UpdateProfileItems,
 		image,
 		notify,
+		bio,
+		setBio,
+		location,
+		setLocation,
 	} = useImg();
 
 	return (
@@ -101,6 +106,8 @@ const Profiles = () => {
 								{/* bottom section */}
 								<div className='flex flex-col mb-4'>
 									<input
+										value={bio}
+										onChange={(e) => setBio(e.target.value)}
 										type='bio'
 										className='border relative bg-gray-100 p-2 focus:outline-none placeholder:text-gray-500 h-14'
 										placeholder='#Bio'
@@ -108,6 +115,10 @@ const Profiles = () => {
 								</div>
 								<div className='flex flex-col mb-4'>
 									<input
+										value={location}
+										onChange={(e) => {
+											setLocation(e.target.value);
+										}}
 										type='location'
 										className='border relative bg-gray-100 p-2 focus:outline-none placeholder:text-gray-500'
 										placeholder='Location'
@@ -119,6 +130,9 @@ const Profiles = () => {
 										className='border relative bg-gray-100 p-2 focus:outline-none placeholder:text-gray-500'
 										placeholder='Birthday'
 									/>
+								</div>
+								<div className='flex flex-col mb-4'>
+									<DropDown />
 								</div>
 								<div className='text-sm text-start border-b border-gray-400 font-semibold my-3'>
 									<p>Privacy ans safety</p>

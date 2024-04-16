@@ -53,13 +53,11 @@ const Login = () => {
 						/>
 					</div>
 					<div className='flex flex-col mb-2 items-end'>
-						<button
-							onClick={(e) => direction.push(routes.ResetPasswordLoginPage)}
-						>
+						<Link href={routes.ResetPasswordLoginPage}>
 							<p className='text-[10px] text-[#1b75d0] p-1'>
 								Forgot Password ?
 							</p>
-						</button>
+						</Link>
 					</div>
 					<button
 						onClick={loginToApp}

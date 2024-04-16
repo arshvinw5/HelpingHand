@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { v4 } from 'uuid';
-import { auth, storage } from '../../_api/firebase';
+import { auth, db, storage } from '../../_api/firebase';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { useDispatch } from 'react-redux';
 import { login } from '@/app/_api/userSlice';
@@ -22,10 +22,30 @@ const useImg = () => {
 	const [firstName, setFirstName] = useState<string>('');
 	const [surname, setSurname] = useState<string>('');
 	const [email, setEmail] = useState<string>('');
-	const [password, setPassword] = useState<string>('');
 	const [notify, setNotify] = useState<string>('');
+	const [selectValue, setSelectValue] = useState('');
 
 	const [displayName, setDisplayName] = useState<string>('');
+
+	const [bio, setBio] = useState<string>('');
+	const [location, setLocation] = useState<string>('');
+	const [birthday, setBirthday] = useState<string>('');
+
+	console.log(selectValue.value);
+
+	// To add values to user firestore
+	// useEffect(() => {
+	// 	auth.onAuthStateChanged(async (currentUser) => {
+	// 		{
+	// 			currentUser &&
+	// 				(await db.collection('user').doc(currentUser?.uid).set({
+	// 					state: selectValue.value,
+	// 				}));
+
+	// 			setbio(`Done`);
+	// 		}
+	// 	});
+	// }, [selectValue]);
 
 	useEffect(() => {
 		const fullName = `${firstName} ${surname}`;
@@ -67,6 +87,19 @@ const useImg = () => {
 								displayName: displayName,
 								photoURL: image,
 							})
+							.then(async () => {
+								{
+									currentUser &&
+										(await db
+											.collection('userProfiles')
+											.doc(currentUser?.uid)
+											.set({
+												state: selectValue,
+												bioData: bio,
+												location: location,
+											}));
+								}
+							})
 							.then(() => {
 								dispatch(
 									login({
@@ -77,6 +110,7 @@ const useImg = () => {
 									})
 								);
 							}));
+
 					setLoading(false);
 					path.replace(routes.home);
 				}
@@ -102,6 +136,12 @@ const useImg = () => {
 		setSurname,
 		UpdateProfileItems,
 		notify,
+		selectValue,
+		setSelectValue,
+		bio,
+		setBio,
+		location,
+		setLocation,
 	};
 };
 
