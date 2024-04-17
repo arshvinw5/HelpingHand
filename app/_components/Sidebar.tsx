@@ -6,7 +6,9 @@ import { useRouter } from 'next/navigation';
 import { routes } from '../lib/assets/route_links';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import { useEffect, useState } from 'react';
-import { db } from '../_api/firebase';
+import { auth, db } from '../_api/firebase';
+import { getDoc } from '@firebase/firestore';
+import { doc } from '@firebase/firestore';
 
 const Sidebar = () => {
 	const user = useSelector(selectUser);
@@ -15,14 +17,23 @@ const Sidebar = () => {
 	const [userProfiles, setUserProfiles] = useState([]);
 
 	useEffect(() => {
-		db.collection('userProfiles').onSnapshot((snapshot) => {
-			//we have set up all the date to post variable.
-			setUserProfiles(
-				snapshot.docs.map((doc) => ({
-					id: doc.id,
-					data: doc.data(),
-				}))
-			);
+		//way to fetch data from single doc
+		auth.onAuthStateChanged(async (currentUser) => {
+			if (currentUser) {
+				const docRef = doc(db, 'userProfiles', currentUser?.uid);
+				const docSnap = await getDoc(docRef);
+				if (docSnap.exists()) {
+					// Assuming docSnap.data() is an object
+					const userProfileData = docSnap.data();
+					setUserProfiles([userProfileData]); // Store data in an array
+				} else {
+					// Handle if document doesn't exist
+					setUserProfiles([]);
+				}
+			} else {
+				// Handle if user is not logged in
+				setUserProfiles([]);
+			}
 		});
 	}, []);
 
@@ -65,12 +76,12 @@ const Sidebar = () => {
 					</Avatar>
 					<h2 className='text-[18px] font-semibold'>{user.displayName}</h2>
 					<h4 className='text-gray-600 text-[12px]'>{user.email}</h4>
-					{userProfiles.map(({ id, data }) => (
+					{userProfiles.map(({ state }, index) => (
 						<h4
-							key={id}
+							key={index}
 							className='font-semibold text-gray-500 text-[12px] text-center uppercase mt-1 '
 						>
-							{data.state}
+							{state}
 						</h4>
 					))}
 				</div>
@@ -86,8 +97,8 @@ const Sidebar = () => {
 					{/*Track of Availability */}
 					<div className='mt-[10px] flex justify-between items-center'>
 						<p className='text-center'>Location </p>
-						{userProfiles.map(({ id, data: { location } }) => (
-							<p key={id}>{location}</p>
+						{userProfiles.map(({ location }, index) => (
+							<p key={index}>{location}</p>
 						))}
 					</div>
 					<div className='mt-[10px] flex justify-between items-center'>
@@ -107,9 +118,9 @@ const Sidebar = () => {
 				{/*Sidebar bottom*/}
 				<div className='text-left p-[10px] shadow-xl bg-white rounded-[10px] mt-[10px] '>
 					<p className='text-[13px ] pb-[10px]'>Bio</p>
-					{userProfiles.map(({ id, data: { bioData } }, index) =>
-						recentItem(bioData)
-					)}
+					{userProfiles.map(({ bioData }, index) => (
+						<div key={index}>{recentItem(bioData)}</div>
+					))}
 				</div>
 				<div className='text-left p-[10px] shadow-xl bg-white rounded-[10px] mt-[10px] '>
 					<h1 className='text-sm uppercase font-semibold text-gray-700 my-5'>

@@ -99,8 +99,9 @@ const useImg = () => {
 					path.replace(routes.home);
 				}
 			});
-		} catch (error) {
-			alert(error);
+		} catch (error: any) {
+			console.error('Error updating user:', error.message);
+			setNotify(`Error updating user: ${error.message}`);
 		}
 	};
 

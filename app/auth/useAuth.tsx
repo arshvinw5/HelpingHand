@@ -21,6 +21,9 @@ const useAuth = () => {
 	const [password, setPassword] = useState<string>('');
 	const [profilePic, setProfilePic] = useState<string>('');
 	const [notify, setNotify] = useState<string>('');
+	const [bio, setBio] = useState<string>('');
+	const [location, setLocation] = useState<string>('');
+	const [selectValue, setSelectValue] = useState('');
 
 	//to route to page you want if push you can go back but replace you cannot route back page.
 	const navDirect = useRouter();
@@ -80,10 +83,18 @@ const useAuth = () => {
 
 			if (user) {
 				// Update user profile
-				await user.updateProfile({
-					displayName: displayName,
-					photoURL: profilePic,
-				});
+				await user
+					.updateProfile({
+						displayName: displayName,
+						photoURL: profilePic,
+					}) // add rest of the information to firestore
+					.then(async () => {
+						await db.collection('userProfiles').doc(user?.uid).set({
+							state: selectValue.value,
+							bioData: bio,
+							location: location,
+						});
+					});
 
 				// Send email verification
 				await sendEmailVerification(user);
@@ -111,7 +122,7 @@ const useAuth = () => {
 				}
 			} else {
 				console.error('User authentication failed');
-				alert('User authentication failed. Please try again.');
+				setNotify('User authentication failed. Please try again.');
 			}
 		} catch (error: any) {
 			console.error('Error creating user:', error.message);
@@ -152,27 +163,12 @@ const useAuth = () => {
 		notify,
 		googleSignIn,
 		uploadDp,
+		bio,
+		setBio,
+		location,
+		setLocation,
+		setSelectValue,
 	};
 };
 
 export default useAuth;
-
-// if (user) {
-
-// 	await sendEmailVerification(user);
-// 	await user
-// 		.updateProfile({
-// 			displayName: displayName,
-// 			photoURL: profilePic,
-// 		})
-// 		.then(() => {
-// 			//this will store the data in redux slice
-// 			dispatch(
-// 				login({
-// 					email: user.email,
-// 					uid: user.uid,
-// 					displayName: displayName,
-// 					photoUrl: profilePic,
-// 				})
-// 			);
-// 		});

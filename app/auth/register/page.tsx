@@ -5,6 +5,7 @@ import useAuth from '../useAuth';
 import { Avatar } from '@mui/material';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import useImg from '@/app/(open_routes)/userProfiles/useImg';
+import DropDown from '@/app/(open_routes)/userProfiles/dropDown';
 
 export default function RegistrationPage() {
 	const {
@@ -20,6 +21,11 @@ export default function RegistrationPage() {
 		notify,
 		uploadDp,
 		profilePic,
+		bio,
+		setBio,
+		location,
+		setLocation,
+		setSelectValue,
 	} = useAuth();
 
 	return (
@@ -102,6 +108,37 @@ export default function RegistrationPage() {
 								</div>
 							</div>
 						</div>
+						<div className='flex flex-col mb-4'>
+							<input
+								value={bio}
+								onChange={(e) => setBio(e.target.value)}
+								type='bio'
+								className='border relative bg-gray-100 p-2 focus:outline-none placeholder:text-gray-500 '
+								placeholder='#Bio'
+							/>
+						</div>
+						<div className='flex flex-col mb-4'>
+							<input
+								value={location}
+								onChange={(e) => {
+									setLocation(e.target.value);
+								}}
+								type='location'
+								className='border relative bg-gray-100 p-2 focus:outline-none placeholder:text-gray-500'
+								placeholder='Location'
+							/>
+						</div>
+						<div className='flex flex-col mb-4'>
+							<input
+								type='location'
+								className='border relative bg-gray-100 p-2 focus:outline-none placeholder:text-gray-500'
+								placeholder='Birthday'
+							/>
+						</div>
+						<div className='flex flex-col mb-4'>
+							<DropDown setSelectValue={setSelectValue} />
+						</div>
+
 						<div className='flex flex-col mb-4'>
 							<input
 								value={email}

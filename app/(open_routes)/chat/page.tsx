@@ -46,18 +46,23 @@ import {
 import Link from 'next/link';
 import { routes } from '@/app/lib/assets/route_links';
 import Header from '@/app/_components/header/Header';
+import Image from 'next/image';
 
 export default function Chat() {
 	return (
 		<>
-			{/* <Header /> */}
-
+			<Header />
 			<div className='grid h-screen w-full pl-[56px]'>
 				<aside className='inset-y fixed  left-0 z-20 flex h-full flex-col border-r'>
 					<div className='border-b p-2'>
 						<Link rel='stylesheet' href={routes.home}>
 							<Button variant='outline' size='icon' aria-label='Home'>
-								<Triangle className='size-5 fill-foreground' />
+								<Image
+									src='/img/logo/Help.png'
+									alt='logo'
+									width={30}
+									height={30}
+								/>
 							</Button>
 						</Link>
 					</div>
@@ -79,7 +84,6 @@ export default function Chat() {
 								</TooltipContent>
 							</Tooltip>
 						</TooltipProvider>
-
 						<TooltipProvider>
 							<Tooltip>
 								<TooltipTrigger asChild>
