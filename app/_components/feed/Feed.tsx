@@ -71,6 +71,7 @@ const Feed = () => {
 	const statusImgFun = async (e) => {
 		e.preventDefault();
 
+		const valOfImg = e.target.files[0];
 		const fileRef = ref(storage, `postsImg/img/${v4()}`);
 		//upload files to storage
 		await uploadBytes(fileRef, e.target.files[0]).then(async (data) => {
@@ -78,6 +79,8 @@ const Feed = () => {
 				setImage(linkUrl);
 			});
 		});
+
+		return valOfImg;
 	};
 	return (
 		<div className='mx-[15px] md:mx-[10px]'>
@@ -99,6 +102,11 @@ const Feed = () => {
 							Send
 						</button>
 					</form>
+				</div>
+				<div>
+					<div className='my-3'>
+						<img src={image} className='w-full' />
+					</div>
 				</div>
 				{/*Input options*/}
 				<div className='flex justify-evenly '>
