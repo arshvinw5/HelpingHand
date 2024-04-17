@@ -13,4 +13,5 @@ export const routes = {
 	ResetPassword: '/auth/resetPassword',
 	ResetPasswordLoginPage: '/auth/resetPasswordLogin',
 	chat: '/chat',
+	events: '/event',
 };

@@ -38,6 +38,9 @@ const Header = () => {
 	const routeChat = () => {
 		navDirect.push(routes.chat);
 	};
+	const routeEvent = () => {
+		navDirect.push(routes.events);
+	};
 
 	return (
 		<div className='sticky top-0 left-0 z-50 w-full'>
@@ -72,7 +75,11 @@ const Header = () => {
 						title='Organization'
 						onClick={routeOrg}
 					/>
-					<HeaderOption Icon={EditCalendarIcon} title='Events' />
+					<HeaderOption
+						Icon={EditCalendarIcon}
+						title='Events'
+						onClick={routeEvent}
+					/>
 					<HeaderOption Icon={ChatIcon} title='Chat' onClick={routeChat} />
 					<HeaderOption Icon={NotificationsIcon} title='Notifications' />
 					<HeaderOption avatar={true} title='Log Out' onClick={handelLogout} />

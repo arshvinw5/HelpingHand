@@ -54,6 +54,11 @@ const Feed = () => {
 	// Add button to post
 	const sendPost = async (e) => {
 		e.preventDefault();
+
+		if (!input) {
+			return alert(`What's on your mind ?`);
+		}
+
 		await db.collection('posts').add({
 			name: user.displayName,
 			description: user.email,
@@ -68,10 +73,9 @@ const Feed = () => {
 		setInput('');
 	};
 
-	const statusImgFun = async (e) => {
+	const statusImgFun = async (e: any) => {
 		e.preventDefault();
 
-		const valOfImg = e.target.files[0];
 		const fileRef = ref(storage, `postsImg/img/${v4()}`);
 		//upload files to storage
 		await uploadBytes(fileRef, e.target.files[0]).then(async (data) => {
@@ -79,8 +83,6 @@ const Feed = () => {
 				setImage(linkUrl);
 			});
 		});
-
-		return valOfImg;
 	};
 	return (
 		<div className='mx-[15px] md:mx-[10px]'>
@@ -98,7 +100,14 @@ const Feed = () => {
 							//need this to get values to input in state
 							onChange={(e) => setInput(e.target.value)}
 						/>
-						<button onClick={sendPost} className='font-semibold' type='submit'>
+						<button
+							onClick={sendPost}
+							disabled={!input}
+							className={`text-gray-400 font-semibold ${
+								input ? ' text-black font-semibold' : null
+							}`}
+							type='submit'
+						>
 							Send
 						</button>
 					</form>
