@@ -104,7 +104,7 @@ const Feed = () => {
 							onClick={sendPost}
 							disabled={!input}
 							className={`text-gray-400 font-semibold ${
-								input ? ' text-black font-semibold' : null
+								input ? 'text-gray-950 font-semibold' : null
 							}`}
 							type='submit'
 						>

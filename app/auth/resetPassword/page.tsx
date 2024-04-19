@@ -25,8 +25,8 @@ const ResetPassword = () => {
 				setNotify(`Check your email`);
 			});
 			setLoading(false);
-		} catch (error) {
-			alert(error);
+		} catch (error: any) {
+			setNotify(error.message);
 		}
 	};
 

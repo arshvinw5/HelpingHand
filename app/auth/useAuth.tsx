@@ -41,6 +41,9 @@ const useAuth = () => {
 	//Login page function
 	const loginToApp: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
 		e.preventDefault();
+		if (!email && !password) {
+			return setNotify(`Invalid Email and Password`);
+		}
 		await signInWithEmailAndPassword(auth, email, password);
 		//ser email and password back to empty
 		setEmail('');

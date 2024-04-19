@@ -5,8 +5,6 @@ import { auth, db, storage } from '../../_api/firebase';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { useDispatch } from 'react-redux';
 import { login } from '@/app/_api/userSlice';
-import { getAuth } from 'firebase/auth';
-import { count } from 'console';
 import { useRouter } from 'next/navigation';
 import { routes } from '@/app/lib/assets/route_links';
 

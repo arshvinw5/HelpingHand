@@ -8,8 +8,15 @@ import useAuth from '../useAuth';
 import { useRouter } from 'next/navigation';
 
 const Login = () => {
-	const { email, password, setEmail, setPassword, loginToApp, googleSignIn } =
-		useAuth();
+	const {
+		email,
+		password,
+		setEmail,
+		setPassword,
+		loginToApp,
+		googleSignIn,
+		notify,
+	} = useAuth();
 	const direction = useRouter();
 
 	return (
@@ -59,6 +66,10 @@ const Login = () => {
 							</p>
 						</Link>
 					</div>
+					<p className='text-sm text-center font-semibold text-[#EF6262] my-5'>
+						{notify}
+					</p>
+
 					<button
 						onClick={loginToApp}
 						className='w-full p-2 mt-2 border border-black hover:bg-black hover:text-white'
