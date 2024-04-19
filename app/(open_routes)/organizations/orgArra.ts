@@ -30,11 +30,13 @@ export const marketArr = [
 	{
 		id: 'ma03',
 		title: 'Rotary Colombo',
+		about:
+			'We the officers of Rotary Club of Colombo, Ceylon, do hereby certify that this list constitutes the charter membership list and agreements of the Rotary Club of Colombo, Ceylon.',
 		location: 'Colombo',
 		price: '$$$',
 		date: '23.04.2024',
 		img: {
-			src: '/img/Volunteer/dog_care.jpg',
+			src: '/img/org/Rotary.jpg',
 			alt: 'Events Cards',
 		},
 		status: 'Latest',
@@ -42,6 +44,8 @@ export const marketArr = [
 	{
 		id: 'ma04',
 		title: 'Lions Clubs',
+		about:
+			'Our association is made up of 1.4 million members in 49,000 clubs who bring hands and hearts to the communities we serve in nearly every country on earth. Our Lions and Leos help hundreds of millions of people every year. Check out the ways we serve.',
 		location: 'Colombo',
 		price: '$$$',
 		date: '23.04.2024',
@@ -54,11 +58,13 @@ export const marketArr = [
 	{
 		id: 'ma05',
 		title: 'United Nations Volunteers',
+		about:
+			'UNV is based in Bonn, Germany, with around 150 staff members at headquarters, and 12,408 UN Volunteers deployed in the field in 2022. UNV has an office in New York, six regional offices in Amman, Bangkok, Dakar, Istanbul, Nairobi and Panama City, a liaison office in Tokyo and around 60 Field Units. Toily Kurbanov is our Executive Coordinator.',
 		location: 'Colombo',
 		price: '$$$',
 		date: '23.04.2024',
 		img: {
-			src: '/img/Volunteer/turtle.jpg',
+			src: '/img/org/unvol.png',
 			alt: 'Events Cards',
 		},
 		status: 'Latest',
@@ -66,7 +72,9 @@ export const marketArr = [
 	{
 		id: 'ma06',
 		title: 'AIESEC',
-		location: 'Kandy',
+		about:
+			'AIESEC is a community of young people, passionately driven by one cause: peace and fulfilment of humankind’s potential.',
+		location: 'Colombo',
 		price: '$$$',
 		date: '23.04.2024',
 		img: {
