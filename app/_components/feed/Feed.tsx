@@ -24,6 +24,7 @@ interface PostData {
 		message: string;
 		photoUrl: string;
 		timestamp: firebase.firestore.Timestamp;
+		postsImg: 'string';
 	};
 }
 
@@ -42,17 +43,17 @@ const Feed = () => {
 			.orderBy('timestamp', 'desc')
 			.onSnapshot(async (snapshot) => {
 				//we have set up all the date to post variable.
-				await setPosts(
+				setPosts(
 					snapshot.docs.map((doc) => ({
 						id: doc.id,
-						data: doc.data(),
+						data: doc.data() as PostData['data'],
 					}))
 				);
 			});
 	}, []);
 
 	// Add button to post
-	const sendPost = async (e) => {
+	const sendPost = async (e: any) => {
 		e.preventDefault();
 
 		if (!input) {

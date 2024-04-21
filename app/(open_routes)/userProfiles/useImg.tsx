@@ -8,6 +8,11 @@ import { login } from '@/app/_api/userSlice';
 import { useRouter } from 'next/navigation';
 import { routes } from '@/app/lib/assets/route_links';
 
+type selectValType = {
+	value: string;
+	label: string;
+};
+
 const useImg = () => {
 	const dispatch = useDispatch();
 	const path = useRouter();
@@ -21,7 +26,7 @@ const useImg = () => {
 	const [surname, setSurname] = useState<string>('');
 	const [email, setEmail] = useState<string>('');
 	const [notify, setNotify] = useState<string>('');
-	const [selectValue, setSelectValue] = useState('');
+	const [selectValue, setSelectValue] = useState<selectValType | null>(null);
 
 	const [displayName, setDisplayName] = useState<string>('');
 
@@ -76,7 +81,7 @@ const useImg = () => {
 											.collection('userProfiles')
 											.doc(currentUser?.uid)
 											.set({
-												state: selectValue.value,
+												state: selectValue?.value,
 												bioData: bio,
 												location: location,
 											}));

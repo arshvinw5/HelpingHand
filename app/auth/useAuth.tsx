@@ -14,6 +14,11 @@ import { routes } from '../lib/assets/route_links';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { v4 } from 'uuid';
 
+type selectValType = {
+	value: string;
+	label: string;
+};
+
 const useAuth = () => {
 	const [email, setEmail] = useState<string>('');
 	const [firstName, setFirstName] = useState<string>('');
@@ -23,7 +28,8 @@ const useAuth = () => {
 	const [notify, setNotify] = useState<string>('');
 	const [bio, setBio] = useState<string>('');
 	const [location, setLocation] = useState<string>('');
-	const [selectValue, setSelectValue] = useState('');
+
+	const [selectValue, setSelectValue] = useState<selectValType | null>(null);
 
 	//to route to page you want if push you can go back but replace you cannot route back page.
 	const navDirect = useRouter();
@@ -93,7 +99,7 @@ const useAuth = () => {
 					}) // add rest of the information to firestore
 					.then(async () => {
 						await db.collection('userProfiles').doc(user?.uid).set({
-							state: selectValue.value,
+							state: selectValue?.value,
 							bioData: bio,
 							location: location,
 						});

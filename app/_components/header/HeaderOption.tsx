@@ -8,7 +8,7 @@ type headerOptionType = {
 	avatar?: React.ReactNode;
 	Icon?: React.ElementType;
 	title: string;
-	onClick?: () => {};
+	onClick?: () => void;
 };
 
 const HeaderOption = ({ avatar, Icon, title, onClick }: headerOptionType) => {

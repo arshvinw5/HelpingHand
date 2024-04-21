@@ -7,14 +7,14 @@ import { routes } from '../lib/assets/route_links';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import { useEffect, useState } from 'react';
 import { auth, db } from '../_api/firebase';
-import { getDoc } from '@firebase/firestore';
+import { DocumentData, getDoc } from '@firebase/firestore';
 import { doc } from '@firebase/firestore';
 
 const Sidebar = () => {
 	const user = useSelector(selectUser);
 	const path = useRouter();
 
-	const [userProfiles, setUserProfiles] = useState([]);
+	const [userProfiles, setUserProfiles] = useState<DocumentData>([]);
 
 	useEffect(() => {
 		//way to fetch data from single doc
@@ -76,7 +76,7 @@ const Sidebar = () => {
 					</Avatar>
 					<h2 className='text-[18px] font-semibold'>{user.displayName}</h2>
 					<h4 className='text-gray-600 text-[12px]'>{user.email}</h4>
-					{userProfiles.map(({ state }, index) => (
+					{userProfiles.map(({ state }: { state: string }, index: number) => (
 						<h4
 							key={index}
 							className='font-semibold text-gray-500 text-[12px] text-center uppercase mt-1 '
@@ -97,9 +97,11 @@ const Sidebar = () => {
 					{/*Track of Availability */}
 					<div className='mt-[10px] flex justify-between items-center'>
 						<p className='text-center'>Location </p>
-						{userProfiles.map(({ location }, index) => (
-							<p key={index}>{location}</p>
-						))}
+						{userProfiles.map(
+							({ location }: { location: string }, index: number) => (
+								<p key={index}>{location}</p>
+							)
+						)}
 					</div>
 					<div className='mt-[10px] flex justify-between items-center'>
 						<p className='text-center'>Available </p>
@@ -118,9 +120,11 @@ const Sidebar = () => {
 				{/*Sidebar bottom*/}
 				<div className='text-left p-[10px] shadow-xl bg-white rounded-[10px] mt-[10px] '>
 					<p className='text-[13px ] pb-[10px]'>Bio</p>
-					{userProfiles.map(({ bioData }, index) => (
-						<div key={index}>{recentItem(bioData)}</div>
-					))}
+					{userProfiles.map(
+						({ bioData }: { bioData: string }, index: number) => (
+							<div key={index}>{recentItem(bioData)}</div>
+						)
+					)}
 				</div>
 				<div className='text-left p-[10px] shadow-xl bg-white rounded-[10px] mt-[10px] '>
 					<h1 className='text-sm uppercase font-semibold text-gray-700 my-5'>

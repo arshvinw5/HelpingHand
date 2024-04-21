@@ -17,7 +17,10 @@ type postsTypes = {
 
 // eslint-disable-next-line react/display-name
 const Post = forwardRef(
-	({ name, description, message, photoUrl, postsImg }: postsTypes, ref) => {
+	(
+		{ name, description, message, photoUrl, postsImg }: postsTypes,
+		ref: React.ForwardedRef<HTMLDivElement>
+	) => {
 		return (
 			<div ref={ref} className='bg-white p-4 mb-2.5 rounded-md shadow-xl'>
 				{/*Post header*/}
