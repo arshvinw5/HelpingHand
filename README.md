@@ -10,13 +10,6 @@ Introduction
 
 Helping Hands is a project developed as part of the CI6125 Software Development Practices Coursework 1. The platform aims to create a community-driven volunteering platform where individuals can connect with purposeful volunteering opportunities, initiate new environmentally friendly and community-helpful activities, and organize volunteer-driven projects.
 
-Key Features:
-
-    Volunteering Opportunities: Users can search for and find various volunteering opportunities available within their community or region.
-    Activity Creation: Users have the ability to create and initiate new environmentally friendly and community-helpful activities and organizations.
-    Profile Management: Volunteering individuals can create profiles, add past volunteering experiences, specify future interests, and allocate time for participation.
-    Project Sharing: Users can share their volunteering experiences and project details by adding pictures and posts to their timeline.
-
 Team Members
 
 K2428740 E222827 Visula Rajakaruna
