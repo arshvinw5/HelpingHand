@@ -21,15 +21,15 @@ const OrgRegFormV2 = () => {
 	const inputArr = [
 		{
 			id: 1,
-			name: 'firstName',
+			name: 'orgName',
 			type: 'text',
-			placeholder: 'First Name',
+			placeholder: 'Organization Name',
 		},
 		{
 			id: 2,
-			name: 'lastName',
+			name: 'category',
 			type: 'text',
-			placeholder: 'Last Name',
+			placeholder: 'Category',
 		},
 		{
 			id: 3,
@@ -38,13 +38,25 @@ const OrgRegFormV2 = () => {
 			placeholder: 'Status',
 		},
 		{
+			id: 3,
+			name: 'date',
+			type: 'date',
+			placeholder: 'Date',
+		},
+		{
 			id: 4,
+			name: 'location',
+			type: 'text',
+			placeholder: 'Location',
+		},
+		{
+			id: 5,
 			name: 'orgEmail',
 			type: 'email',
 			placeholder: 'Organization Email',
 		},
 		{
-			id: 5,
+			id: 6,
 			name: 'password',
 			type: 'password',
 			placeholder: 'Password',
@@ -61,7 +73,7 @@ const OrgRegFormV2 = () => {
 	};
 
 	return (
-		<div className=' h-screen flex justify-center items-center'>
+		<div className='h-screen w-full flex justify-center items-center'>
 			<form
 				onSubmit={handleCreateOrg}
 				className='absolute flex flex-col bg-white max-w-[380px] md:max-w-[510px] w-full mx-auto p-10 rounded-md shadow-2xl'>

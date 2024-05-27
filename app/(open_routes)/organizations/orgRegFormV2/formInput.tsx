@@ -1,6 +1,6 @@
 import { Input } from '@/components/ui/input';
 
-const FormInput = ({ name, type, placeholder, value, onChange }: any) => {
+const FormInput = ({ name, type, placeholder, value, onChange, errMessage }: any) => {
 	return (
 		<div className='flex flex-col my-4'>
 			<Input
@@ -11,6 +11,7 @@ const FormInput = ({ name, type, placeholder, value, onChange }: any) => {
 				value={value}
 				onChange={onChange}
 			/>
+			<span>{errMessage}</span>
 		</div>
 	);
 };
