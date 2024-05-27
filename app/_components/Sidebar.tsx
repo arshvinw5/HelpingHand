@@ -70,20 +70,20 @@ const Sidebar = () => {
 							fontSize: 30,
 							fontWeight: 600,
 						}}
-						src={user.photoUrl}
-					>
+						src={user.photoUrl}>
 						{user?.displayName[0]}
 					</Avatar>
 					<h2 className='text-[18px] font-semibold'>{user.displayName}</h2>
 					<h4 className='text-gray-600 text-[12px]'>{user.email}</h4>
-					{userProfiles.map(({ state }: { state: string }, index: number) => (
-						<h4
-							key={index}
-							className='font-semibold text-gray-500 text-[12px] text-center uppercase mt-1 '
-						>
-							{state}
-						</h4>
-					))}
+					{userProfiles.map(
+						({ state }: { state: string }, index: number) => (
+							<h4
+								key={index}
+								className='font-semibold text-gray-500 text-[12px] text-center uppercase mt-1 '>
+								{state}
+							</h4>
+						)
+					)}
 				</div>
 				{/* Sidebar status */}
 				<div className='p-[20px] mb-[10px] rounded-bl-[10px] rounded-br-[10px] shadow-xl bg-[#fff]'>
@@ -107,8 +107,7 @@ const Sidebar = () => {
 						<p className='text-center'>Available </p>
 						<button
 							onClick={editProfile}
-							className='flex  justify-center items-center gap-1 m-0 px-[px] hover:bg-black hover:text-[#fff] hover:rounded-sm'
-						>
+							className='flex  justify-center items-center gap-1 m-0 px-[px] hover:bg-black hover:text-[#fff] hover:rounded-sm'>
 							<EditNoteIcon
 								className='cursor-pointer'
 								sx={{ width: 12, height: 12 }}

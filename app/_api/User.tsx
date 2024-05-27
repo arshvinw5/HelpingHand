@@ -57,9 +57,9 @@ const User = () => {
 export default User;
 
 // Inside the useEffect, there's a function named
-// checkFectingData. This function is defined as an asynchronous
+// checkFetchingData. This function is defined as an asynchronous
 // function using the async keyword. This means it can use the await
 // keyword to pause execution until an asynchronous operation completes.
 
-// Within checkFectingData, there's a Promise created using new Promise().
+// Within checkFetchingData, there's a Promise created using new Promise().
 //  This promise resolves after a delay of 500 milliseconds using setTimeout(resolve, 500).

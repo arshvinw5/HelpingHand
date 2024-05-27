@@ -39,8 +39,7 @@ const ResetPassword = () => {
 						<div className='flex justify-center mt-10'>
 							<form
 								action=''
-								className='absolute bg-white max-w-[380px] md:max-w-[510px] w-full mx-auto p-10 rounded-md shadow-xl'
-							>
+								className='absolute bg-white max-w-[380px] md:max-w-[510px] w-full mx-auto p-10 rounded-md shadow-xl'>
 								<div className='flex justify-center items-center py-1 border-b-2 border-gray-400'>
 									<span className='text-2xl md:text-3xl font-bold bg-[#fff]'>
 										Reset Your Password
@@ -48,8 +47,9 @@ const ResetPassword = () => {
 								</div>
 								<div className='flex flex-col my-5'>
 									<p className='text-sm'>
-										Forgot your account&apos;s password ? Enter your email
-										address and we&apos;ll send you a recovery link.
+										Forgot your account&apos;s password ? Enter your
+										email address and we&apos;ll send you a recovery
+										link.
 									</p>
 								</div>
 								<div className='flex flex-col my-4'>
@@ -71,8 +71,7 @@ const ResetPassword = () => {
 									disabled={loading}
 									onClick={ResetPassword}
 									type='submit'
-									className='w-full p-2 mt-2 border border-black hover:bg-black hover:text-white'
-								>
+									className='w-full p-2 mt-2 border border-black hover:bg-black hover:text-white'>
 									Send recovery email
 								</button>
 							</form>

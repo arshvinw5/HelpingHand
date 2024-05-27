@@ -30,7 +30,9 @@ const Login = () => {
 			<div className='flex justify-center items-center h-screen'>
 				<form className='absolute bg-white max-w-[380px] md:max-w-[400px] w-full mx-auto p-10 rounded-md'>
 					<div className='flex justify-center items-center py-4'>
-						<h1 className='text-3xl md:text-4xl font-bold'>Helping Hands</h1>
+						<h1 className='text-3xl md:text-4xl font-bold'>
+							Helping Hands
+						</h1>
 						<Image
 							src='/img/logo/Help.png'
 							alt='logo'
@@ -72,15 +74,13 @@ const Login = () => {
 
 					<button
 						onClick={loginToApp}
-						className='w-full p-2 mt-2 border border-black hover:bg-black hover:text-white'
-					>
+						className='w-full p-2 mt-2 border border-black hover:bg-black hover:text-white'>
 						Sign In
 					</button>
 					<div className='flex justify-between py-8'>
 						<button
 							onClick={googleSignIn}
-							className='relative  flex justify-center items-center gap-3 border shadow-lg hover:shadow-xl px-6 py-2'
-						>
+							className='relative  flex justify-center items-center gap-3 border shadow-lg hover:shadow-xl px-6 py-2'>
 							<FaGoogle />
 							Google
 						</button>

@@ -71,6 +71,7 @@ const useAuth = () => {
 
 	//Registration Page function
 	const reg: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
+		//to prevent render the form page
 		e.preventDefault();
 
 		if (!firstName && !surname) {

@@ -9,6 +9,8 @@ export const routes = {
 	signout: '/api/auth/signout',
 
 	organization: '/organizations',
+	organizationRegForm: '/organizations/orgRegForm',
+
 	profiles: '/userProfiles',
 	ResetPassword: '/auth/resetPassword',
 	ResetPasswordLoginPage: '/auth/resetPasswordLogin',

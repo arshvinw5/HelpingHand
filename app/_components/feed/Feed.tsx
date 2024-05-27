@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 
+// icons
 import CreateIcon from '@mui/icons-material/Create';
 import InputOptions from './InputOptions';
 import ImageIcon from '@mui/icons-material/Image';
@@ -37,7 +38,7 @@ const Feed = () => {
 
 	const [image, setImage] = useState<string>('');
 
-	//connecting db to system then it
+	//connecting db to system then fetching data then set the post state
 	useEffect(() => {
 		db.collection('posts')
 			.orderBy('timestamp', 'desc')
@@ -107,8 +108,7 @@ const Feed = () => {
 							className={`text-gray-400 font-semibold ${
 								input ? 'text-gray-950 font-semibold' : null
 							}`}
-							type='submit'
-						>
+							type='submit'>
 							Send
 						</button>
 					</form>
@@ -127,11 +127,7 @@ const Feed = () => {
 						<InputOptions Icon={MusicVideoIcon} title='Video' color='#E7A33E' />
 					</label>
 					<InputOptions Icon={EventNoteIcon} title='Event' color='#C0CBCD' />
-					<InputOptions
-						Icon={CalendarViewDayIcon}
-						title='Write Article'
-						color='#7FC15E'
-					/>
+					<InputOptions Icon={CalendarViewDayIcon} title='Write Article' color='#7FC15E' />
 					<input
 						type='file'
 						id='statusImg'
@@ -153,21 +149,16 @@ const Feed = () => {
 
 			{/*Post TimeLine*/}
 			<FlipMove>
-				{posts.map(
-					({
-						id,
-						data: { name, description, message, photoUrl, postsImg },
-					}) => (
-						<Post
-							key={id}
-							name={name}
-							description={description}
-							message={message}
-							photoUrl={photoUrl}
-							postsImg={postsImg}
-						/>
-					)
-				)}
+				{posts.map(({ id, data: { name, description, message, photoUrl, postsImg } }) => (
+					<Post
+						key={id}
+						name={name}
+						description={description}
+						message={message}
+						photoUrl={photoUrl}
+						postsImg={postsImg}
+					/>
+				))}
 			</FlipMove>
 		</div>
 	);

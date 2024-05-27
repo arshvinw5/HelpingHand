@@ -1,12 +1,12 @@
 'use client';
-import Header from '@/app/_components/header/Header';
 import User from '@/app/_api/User';
-import useImg from './useImg';
-import { Avatar } from '@mui/material';
-import EditNoteIcon from '@mui/icons-material/EditNote';
+import Header from '@/app/_components/header/Header';
 import { routes } from '@/app/lib/assets/route_links';
+import EditNoteIcon from '@mui/icons-material/EditNote';
+import { Avatar } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import DropDown from './dropDown';
+import useImg from './useImg';
 
 const Profiles = () => {
 	const { user } = User();
