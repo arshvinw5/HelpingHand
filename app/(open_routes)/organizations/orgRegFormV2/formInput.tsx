@@ -47,7 +47,7 @@ const FormInput = ({
 				required={required}
 				pattern={pattern}
 			/>
-			validation is not true and input felid is touched
+			{/* validation is not true and input felid is touched */}
 			{!isValid && isTouched && (
 				<span className='text-[12px] text-red-500 p-1'>{errMessage}</span>
 			)}
